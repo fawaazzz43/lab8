@@ -1,0 +1,99 @@
+[
+  {
+    "description": "Get started with Machine Learning",
+    "title": "Machine Learning Basics",
+    "studentsIncourse": [
+      {
+        "userId": "501",
+        "role": "Student",
+        "username": "Ahmed Ali",
+        "email": "ahmed@example.com",
+        "passwordHash": "hash123",
+        "enrolledCourses": [],
+        "progress": 0
+      },
+      {
+        "userId": "502",
+        "role": "Student",
+        "username": "Sara Mohamed",
+        "email": "sara@example.com",
+        "passwordHash": "hash456",
+        "enrolledCourses": [],
+        "progress": 0
+      }
+    ],
+    "courseId": "1234",
+    "instructorId": "5",
+    "lessons": [],
+    "status": "PENDING"
+  },
+  {
+    "description": "Learn the basics of Java.",
+    "title": "Java Programming",
+    "studentsIncourse": [
+      {
+        "userId": "503",
+        "role": "Student",
+        "username": "Khaled",
+        "email": "khaled@example.com",
+        "passwordHash": "hash789",
+        "enrolledCourses": [],
+        "progress": 0
+      }
+    ],
+    "courseId": "4321",
+    "instructorId": "6",
+    "lessons": [],
+    "status": "PENDING"
+  },
+  {
+    "description": "Learn Java basics",
+    "title": "Java Basics",
+    "studentsIncourse": [
+      {
+        "userId": "504",
+        "role": "Student",
+        "username": "Youssef",
+        "email": "youssef@example.com",
+        "passwordHash": "hash222",
+        "enrolledCourses": [],
+        "progress": 0
+      }
+    ],
+    "courseId": "101",
+    "instructorId": "2",
+    "lessons": [
+      {
+        "lessonId": "1",
+        "resources": [],
+        "title": "Variables and Data Types",
+        "content": "Understanding primitive data types."
+      },
+      {
+        "lessonId": "2",
+        "resources": [],
+        "title": "Control Flow (If/Else, Loops)",
+        "content": "How to control the execution flow of your program."
+      }
+    ],
+    "status": "PENDING"
+  },
+  {
+    "description": "Introduction to Data Science concepts",
+    "title": "Data Science Fundamentals",
+    "studentsIncourse": [],
+    "courseId": "104",
+    "instructorId": "4",
+    "lessons": [],
+    "status": "PENDING"
+  },
+  {
+    "description": "Build dynamic web applications",
+    "title": "Web Development with JavaScript",
+    "studentsIncourse": [],
+    "courseId": "103",
+    "instructorId": "1",
+    "lessons": [],
+    "status": "PENDING"
+  }
+]
