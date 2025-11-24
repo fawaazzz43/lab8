@@ -3,15 +3,15 @@ import java.util.ArrayList;
 
 public class Course {
     //private static final String fileName = "D:\\programming\\java\\lab7\\lab7_IJ\\courses.json";
-    private String courseId;
+    private int courseId;
     private String title;
     private String description;
-    private String instructorId;
+    private int instructorId;
     private String status ;
     private ArrayList<Lesson> lessons = new ArrayList<>();;
     private ArrayList<Student> studentsIncourse = new ArrayList<>();
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
 
@@ -23,12 +23,12 @@ public class Course {
         this.description = description;
     }
 
-    public void setInstructorId(String instructorId) { // Changed argument type
+    public void setInstructorId(int instructorId) { // Changed argument type
         this.instructorId = instructorId;
     }
 
 
-    public Course(String courseId, String title, String description, String instructorId , String status)
+    public Course(int courseId, String title, String description, int instructorId , String status)
     {
         this.courseId = courseId;
         this.title = title;
@@ -49,7 +49,7 @@ public class Course {
     public ArrayList<Student> getStudentsIncourse() {
         return studentsIncourse;
     }
-    public String getCourseId() {
+    public int getCourseId() {
         return courseId;
     }
     public String getTitle() {
@@ -58,7 +58,7 @@ public class Course {
     public String getDescription() {
         return description;
     }
-    public String getInstructorId() {return instructorId;}
+    public int getInstructorId() {return instructorId;}
     public String getStatus() {return status;}
 
     public void setStatus(String status) {this.status = status;}
