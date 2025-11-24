@@ -21,7 +21,7 @@ public class SignUp {
 
 
     public SignUp() {
-        this.user = new User("D:\\programming\\java\\lab8\\lab8_downloaded_from_githiub\\lab7\\users.json");
+        this.user = new User("users.json");
         user.load();
         this.allStudents = user.getStudents() != null ? user.getStudents() : new ArrayList<>();
         this.allInstructors = user.getInstructors() != null ? user.getInstructors() : new ArrayList<>();
@@ -53,22 +53,22 @@ public class SignUp {
 
     
 
-    public boolean validateuserId(String userId) {
+    public boolean validateuserId(int userId) {
         for ( Student student : allStudents) {
-            if (student.getUserId().equals(userId)) {
+            if (student.getUserId()==(userId)) {
                 return true;
             }
         }
 
         for ( Instructor instructor : allInstructors) {
-            if (instructor.getUserId().equals(userId)) {
+            if (instructor.getUserId()==(userId)) {
                 return true;
             }
         }
 
         for  ( admin ad : allAdmins)
         {
-            if (ad.getUserId().equals(userId)) {
+            if (ad.getUserId()==(userId)) {
                 return true;
             }
         }
