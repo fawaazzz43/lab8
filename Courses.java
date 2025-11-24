@@ -44,10 +44,10 @@ public class Courses {
                 JSONObject courseObj = jsonArray.getJSONObject(i);
 
                 Course course = new Course(
-                        courseObj.getString("courseId"),
+                        courseObj.getInt("courseId"),
                         courseObj.getString("title"),
                         courseObj.getString("description"),
-                        courseObj.getString("instructorId"),
+                        courseObj.getInt("instructorId"),
                         courseObj.getString("status")
                 );
 
@@ -58,10 +58,10 @@ public class Courses {
                         JSONObject lessonObj = lessonsArray.getJSONObject(j);
 
                         Lesson lesson = new Lesson(
-                                lessonObj.getString("lessonId"),
-                                lessonObj.getString("title"),
-                                lessonObj.getString("content")
-                        );
+                                    lessonObj.getInt("lessonId"),
+                                    lessonObj.getString("title"),
+                                    lessonObj.getString("content")
+                                    , (Quiz) lessonObj.get("quiz"));
 
                         course.getLessons().add(lesson);
                     }
@@ -146,7 +146,7 @@ public class Courses {
     {
         for (int i = 0; i < courses.size(); i++)
         {
-            if (courses.get(i).getCourseId().equals(course.getCourseId()))
+            if (courses.get(i).getCourseId()==(course.getCourseId()))
             {
                 courses.get(i).AddStudent(student);
                 break;
