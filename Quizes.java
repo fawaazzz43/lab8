@@ -1,3 +1,4 @@
+/*package lab7;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,7 +10,7 @@ import org.json.JSONObject;
 
 public class Quizes {
     private static ArrayList<Quiz> quizs = new ArrayList<>();
-    private final static String FileName="src/courses.json";
+    private final static String FileName="courses.json";
 
     public List<Quiz> loadAllQuizzes() throws IOException {
    
@@ -145,4 +146,4 @@ public class Quizes {
 
 
     
-}
+}*/
