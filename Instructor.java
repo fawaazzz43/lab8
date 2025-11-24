@@ -19,8 +19,28 @@ public class Instructor{
     private String passwordHash ;
 
     ArrayList<Course> createdCourses = new ArrayList<>();
-    Courses courses = new Courses("courses.json");
-      User user=new User("users.json");
+    Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_v3\\courses.json");
+      User user=new User("D:\\programming\\java\\lab8\\lab8_v3\\users.json");
+
+    public String getRole() {
+        return role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public ArrayList<Course> getCreatedCourses() {
+        return createdCourses;
+    }
+
+    public Courses getCourses() {
+        return courses;
+    }
+
+    public User getUser() {
+        return user;
+    }
     public Instructor(int userId, String role, String username, String email, String passwordHash) throws IOException
     {
         this.userId = userId;
@@ -35,8 +55,8 @@ public class Instructor{
     public void Createcourse(int courseId, String title, String description) throws IOException
     {
         Course course = new Course(courseId,title,description,this.userId,"PENDING");
-        Courses courses = new Courses("courses.json");
-        User user=new User("users.json");
+        Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_v3\\courses.json");
+        User user=new User("D:\\programming\\java\\lab8\\lab8_v3\\users.json");
                 user.load();
                 courses.load();
         courses.addCourse(course);
@@ -46,9 +66,9 @@ public class Instructor{
 
     public void Editcourse(Course course, int courseId, String title, String description, int instructorId) throws IOException
     {
-        Courses courses = new Courses("courses.json");
+        Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_v3\\courses.json");
         Course cu = null;
-        User user=new User("users.json");
+        User user=new User("D:\\programming\\java\\lab8\\lab8_v3\\users.json");
                 user.load();
                 courses.load();
           for(Course c: this.createdCourses)
@@ -67,8 +87,8 @@ public class Instructor{
         user.load();
     }
     public void deleteCourse(int courseId) throws IOException
-    {Courses courses = new Courses("courses.json");
-    User user=new User("users.json");
+    {Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_v3\\courses.json");
+    User user=new User("D:\\programming\\java\\lab8\\lab8_v3\\users.json");
 courses.load();
 user.load();
         for(Course course : courses.getCourses()){
@@ -93,8 +113,8 @@ user.load();
 
     public void Createlesson(Course course,int lessonId, String title, String content,Quiz quiz) throws IOException
     {
-        Courses courses = new Courses("courses.json");
-    User user=new User("users.json");
+        Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_v3\\courses.json");
+    User user=new User("D:\\programming\\java\\lab8\\lab8_v3\\users.json");
         Lesson lesson = new Lesson(lessonId,title,content,quiz);
         course.getLessons().add(lesson);
         courses.SaveToJsonCourses();
@@ -110,8 +130,8 @@ user.load();
 
     public void Editlesson(Course course,Lesson lesson,int lessonId, String title, String content) throws IOException
     {
-        Courses courses = new Courses("courses.json");
-    User user=new User("users.json");
+        Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_v3\\courses.json");
+    User user=new User("D:\\programming\\java\\lab8\\lab8_v3\\users.json");
     for(Course c : createdCourses)
             if(c.getCourseId()==course.getCourseId()){
                for(Lesson l :c.getLessons())
@@ -132,8 +152,8 @@ user.load();
 
     public void Deletelesson(Course course,int lessonId) throws IOException
     {
-         Courses courses = new Courses("courses.json");
-    User user=new User("users.json");
+         Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_v3\\courses.json");
+    User user=new User("D:\\programming\\java\\lab8\\lab8_v3\\users.json");
         for(Lesson lesson : course.getLessons())
         {
             if (lesson.getLessonId()==(lessonId)){
@@ -156,8 +176,8 @@ user.load();
     }
     public void EditQuiz(Course course,Lesson lesson,Quiz quiz,int quizID,String title,int numberOfQuestions) throws IOException
     {
-        Courses courses = new Courses("courses.json");
-    User user=new User("users.json");
+        Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_v3\\courses.json");
+    User user=new User("D:\\programming\\java\\lab8\\lab8_v3\\users.json");
     for(Course c : createdCourses)
             if(c.getCourseId()==course.getCourseId()){
                for(Lesson l :c.getLessons())
@@ -176,8 +196,8 @@ user.load();
     }
     public void EditQuestions(Course course,Lesson lesson,Quiz quiz,Questions questions,String questionText, String correctAnswer, String[] options) throws IOException
     {
-        Courses courses = new Courses("courses.json");
-    User user=new User("users.json");
+        Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_v3\\courses.json");
+    User user=new User("D:\\programming\\java\\lab8\\lab8_v3\\users.json");
     for(Course c : createdCourses)
             if(c.getCourseId()==course.getCourseId()){
                for(Lesson l :c.getLessons())
@@ -198,6 +218,26 @@ user.load();
                 if(!option.equals(""))
                     questions.getOptions()[i]=option;}
         user.save();
+        courses.SaveToJsonCourses();
+        courses.load();
+        user.load();
+    }
+    public void DeleteQuestions(Course course,Lesson lesson,Quiz quiz,Questions questions) throws IOException
+    {
+    Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_v3\\courses.json");
+    User user=new User("D:\\programming\\java\\lab8\\lab8_v3\\users.json");
+    for(Course c : createdCourses)
+            if(c.getCourseId()==course.getCourseId()){
+               for(Lesson l :c.getLessons())
+                   if(l.getLessonId()==lesson.getLessonId()){
+                      for(Questions q :l.getQuiz().getQuestions())
+                          if(q.getQuestionsId()==questions.getQuestionsId()){
+                              l.getQuiz().getQuestions().remove(q);
+                              break;}
+                       break;}
+               break;}
+    quiz.getQuestions().remove(questions);
+    user.save();
         courses.SaveToJsonCourses();
         courses.load();
         user.load();

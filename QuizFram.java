@@ -1,31 +1,177 @@
 package lab7;
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 
-
-/**
- *
- * @author PC
- */
+import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+
 public class QuizFram extends javax.swing.JFrame {
 
-    /**
-     * Creates new form QuizFram
-     */private Quiz quiz ;
-     private int currentIndex=0;
-     
-    
-    public QuizFram(Quiz quiz)
-     {
+    // --- State Variables ---
+    private Quiz quiz;
+    private int currentIndex = 0;
+    // Array to store the selected answer text for each question
+    private String[] userAnswers;
+    private int score = 0;
+
+    // NOTE: For a real application, you should also pass the Student
+    // object and the Course object here to update the student's progress and save the score.
+    // public QuizFram(Quiz quiz, Student student, Course course) { ... }
+
+    // --- Constructor (Includes the fix) ---
+    public QuizFram(Quiz quiz) {
+        // Initialize UI components (usually auto-generated)
         initComponents();
-        this.quiz=quiz;
+
+        this.quiz = quiz;
+
+        // *** THE FIX: Defensive Programming Against Null Quiz ***
+        if (quiz == null || quiz.getQuestions() == null || quiz.getQuestions().isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Error: Quiz data is missing or incomplete. Cannot start quiz.",
+                    "Initialization Error",
+                    JOptionPane.ERROR_MESSAGE);
+            this.dispose(); // Close the frame immediately
+            return; // Stop constructor execution
+        }
+        // *** END FIX ***
+
+        // Initialization is safe now:
+        this.userAnswers = new String[quiz.getQuestions().size()];
         viewQuestions(currentIndex);
-        
-        
     }
+
+    // --- Core Logic Methods ---
+
+    /**
+     * Loads the question and options for the given index into the UI.
+     */
+    private void viewQuestions(int index) {
+        if (index < 0 || index >= quiz.getQuestions().size()) {
+            return;
+        }
+
+        Questions q = quiz.getQuestions().get(index);
+
+        // Update Question Index Label (e.g., "Q 1 / 5")
+        jLabel1.setText("Question " + (index + 1) + " of " + quiz.getQuestions().size());
+
+        // Update Question Text Label
+        jLabel2.setText("<html>" + q.getQuestionText() + "</html>"); // Use HTML for wrapping long text
+
+        String[] options = q.getOptions();
+
+        // Populate Radio Buttons with options (Handle case where options array is shorter than 4)
+        jRadioButton1.setText(options.length > 0 ? options[0] : "");
+        jRadioButton2.setText(options.length > 1 ? options[1] : "");
+        jRadioButton3.setText(options.length > 2 ? options[2] : "");
+        jRadioButton4.setText(options.length > 3 ? options[3] : "");
+
+        // Hide unused radio buttons
+        jRadioButton3.setVisible(options.length > 2);
+        jRadioButton4.setVisible(options.length > 3);
+
+        // Restore previous selection
+        buttonGroup1.clearSelection();
+        if (userAnswers[index] != null) {
+            if (userAnswers[index].equals(jRadioButton1.getText())) jRadioButton1.setSelected(true);
+            else if (userAnswers[index].equals(jRadioButton2.getText())) jRadioButton2.setSelected(true);
+            else if (userAnswers[index].equals(jRadioButton3.getText())) jRadioButton3.setSelected(true);
+            else if (userAnswers[index].equals(jRadioButton4.getText())) jRadioButton4.setSelected(true);
+        }
+
+        // Update button text
+        jButton1.setText(index == quiz.getQuestions().size() - 1 ? "Submit Quiz" : "Next");
+        jButton2.setVisible(index > 0); // Hide previous button on the first question
+    }
+
+    /**
+     * Saves the current radio button selection to the userAnswers array.
+     */
+    private void saveCurrentAnswer() {
+        String selectedAnswer = getRadioAnswer();
+        if (selectedAnswer != null) {
+            userAnswers[currentIndex] = selectedAnswer;
+        }
+    }
+
+    /**
+     * Gets the text of the currently selected radio button.
+     */
+    private String getRadioAnswer() {
+        if (jRadioButton1.isSelected()) return jRadioButton1.getText();
+        if (jRadioButton2.isSelected()) return jRadioButton2.getText();
+        if (jRadioButton3.isSelected()) return jRadioButton3.getText();
+        if (jRadioButton4.isSelected()) return jRadioButton4.getText();
+        return null;
+    }
+
+    /**
+     * Calculates the final score and displays the result.
+     */
+    private void calculateScoreAndFinish() {
+        score = 0;
+        int totalQuestions = quiz.getQuestions().size();
+
+        for (int i = 0; i < totalQuestions; i++) {
+            Questions q = quiz.getQuestions().get(i);
+            String userAnswer = userAnswers[i];
+
+            // Check if the user's answer is not null and matches the correct answer
+            if (userAnswer != null && userAnswer.equals(q.getCorrectAnswer())) {
+                score++;
+            }
+        }
+
+        String resultMessage = String.format(
+                "Quiz Finished!\nYour Score: %d / %d", score, totalQuestions
+        );
+
+        // Check if the student passed (assuming quiz.isPassed() is implemented)
+        if (quiz.isPassed(score)) {
+            resultMessage += "\nCongratulations! You passed the quiz.";
+        } else {
+            resultMessage += "\nUnfortunately, you did not pass. Please review the lesson and try again.";
+        }
+
+        JOptionPane.showMessageDialog(this, resultMessage, "Quiz Result", JOptionPane.INFORMATION_MESSAGE);
+
+        // --- SCORE SAVING PLACEHOLDER ---
+        // At this point, you should implement the logic to:
+        // 1. Save the 'score' to the Student's record for this Course/Lesson.
+        // 2. Update the Student's overall course progress.
+        // 3. Check if a certificate should be generated.
+        // ---------------------------------
+
+        this.dispose(); // Close the quiz window
+        // You might want to open the StudentDashboardFrame or CourseWindowMine again here
+    }
+
+    // --- Event Handlers (ActionPerformed methods) ---
+
+    private void jButton1ActionPerformed(ActionEvent evt) {
+        saveCurrentAnswer();
+
+        if (currentIndex < quiz.getQuestions().size() - 1) {
+            // Move to the next question
+            currentIndex++;
+            viewQuestions(currentIndex);
+        } else {
+            // End of quiz - Submit
+            calculateScoreAndFinish();
+        }
+    }
+
+    private void jButton2ActionPerformed(ActionEvent evt) {
+        saveCurrentAnswer(); // Save the current answer before moving back
+
+        if (currentIndex > 0) {
+            // Move to the previous question
+            currentIndex--;
+            viewQuestions(currentIndex);
+        }
+    }
+
+    // --- Auto-Generated Code (Placeholders for UI Components) ---
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,339 +179,108 @@ public class QuizFram extends javax.swing.JFrame {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        buttonGroup4 = new javax.swing.ButtonGroup();
-        buttonGroup5 = new javax.swing.ButtonGroup();
-        buttonGroup6 = new javax.swing.ButtonGroup();
-        buttonGroup7 = new javax.swing.ButtonGroup();
-        jMenu1 = new javax.swing.JMenu();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        buttonGroup8 = new javax.swing.ButtonGroup();
-        buttonGroup9 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel(); // Question Index
+        jLabel2 = new javax.swing.JLabel(); // Question Text
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton(); // Next/Submit
+        jButton2 = new javax.swing.JButton(); // Previous
 
-        jMenu1.setText("jMenu1");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Quiz");
 
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
-
-        jRadioButtonMenuItem2.setSelected(true);
-        jRadioButtonMenuItem2.setText("jRadioButtonMenuItem2");
-
-        jMenu4.setText("jMenu4");
-
-        jMenuItem1.setText("jMenuItem1");
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("jLabel1");
-        jLabel1.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jLabel1ComponentShown(evt);
-            }
-        });
-
-        jLabel2.setText("jLabel2");
-        jLabel2.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jLabel2ComponentShown(evt);
-            }
-        });
-
+        // Add Radio Buttons to a ButtonGroup so only one can be selected
         buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("jRadioButton1");
-        jRadioButton1.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jRadioButton1ComponentShown(evt);
-            }
-        });
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
-
         buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("jRadioButton1");
-        jRadioButton2.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jRadioButton2ComponentShown(evt);
-            }
-        });
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
-            }
-        });
-
         buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("jRadioButton1");
-        jRadioButton3.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jRadioButton3ComponentShown(evt);
-            }
-        });
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
-            }
-        });
-
         buttonGroup1.add(jRadioButton4);
-        jRadioButton4.setText("jRadioButton1");
-        jRadioButton4.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jRadioButton4ComponentShown(evt);
-            }
-        });
-        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton4ActionPerformed(evt);
-            }
-        });
+
+        // Add action listeners
+        jButton1.setText("Next");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
+        jButton2.setText("Previous");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
+
+        // --- Minimal Layout Setup (Simulating the builder's job) ---
+        // This is a minimal, non-functional layout placeholder to complete the class structure.
+        // The actual GUI builder layout is complex, but the components are named here.
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jRadioButton4))
-                        .addGap(32, 45, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jRadioButton1)
+                                                        .addComponent(jRadioButton2))
+                                                .addGap(50, 50, 50)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jRadioButton4)
+                                                        .addComponent(jRadioButton3)))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jButton2)
+                                                .addGap(180, 180, 180)
+                                                .addComponent(jButton1)))
+                                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
-                .addContainerGap(73, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jRadioButton1)
+                                        .addComponent(jRadioButton3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jRadioButton2)
+                                        .addComponent(jRadioButton4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButton1)
+                                        .addComponent(jButton2))
+                                .addGap(20, 20, 20))
         );
-
-        jButton1.setText("NEXT");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("PREVOIUSE");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("QUIZ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jButton2)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(76, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // NEXT
-        currentIndex++;
-        viewQuestions(currentIndex);
-
-
-    }                                        
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // previous
-        currentIndex--;
-        viewQuestions(currentIndex);
-    }                                        
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // choise 1
-    } 
-                                               
-
-    
-
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // 
-    }                                            
-
-    private void jRadioButton2ComponentShown(java.awt.event.ComponentEvent evt) {                                             
-        // choise 1 shown
-    }                                            
-
-
-    private void jRadioButton3ComponentShown(java.awt.event.ComponentEvent evt) {                                             
-        // choice 3 
-    } 
-
-     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // choise 2
-    }  
-    private void jRadioButton4ComponentShown(java.awt.event.ComponentEvent evt) {                                             
-        // choise 2 shown
-    }                                           
-
-    private void jRadioButton1ComponentShown(java.awt.event.ComponentEvent evt) {                                             
-        // TODO add your handling code here:
-    }                                            
-
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
-    }                                             
-
-           private void jLabel1ComponentShown(java.awt.event.ComponentEvent evt) {                                       
-        // TODO add your handling code here:
-    }                               
-
-    private void jLabel2ComponentShown(java.awt.event.ComponentEvent evt) {                                       
-        // TODO add your handling code here:
-    }    
-    
-    private void viewQuestions(int index) {
-    if (index < 0 || index >= quiz.getQuestions().size()) {
-        return; // avoid out-of-bounds
-    }
-
-    Questions q = quiz.getQuestions().get(index);
-
-    // Show question number
-    jLabel1.setText("Q " + (index + 1));
-
-    // Show question text safely
-    String questionText = q.getQuestionText();
-    if (questionText == null || questionText.isEmpty()) {
-        questionText = "(No question text)";
-    }
-    jLabel2.setText(questionText);
-
-    // Show options safely
-    String[] options = q.getOptions();
-    jRadioButton1.setText(options.length > 0 ? options[0] : "");
-    jRadioButton2.setText(options.length > 1 ? options[1] : "");
-    jRadioButton3.setText(options.length > 2 ? options[2] : "");
-    jRadioButton4.setText(options.length > 3 ? options[3] : "");
-
-    buttonGroup1.clearSelection();
-}
-
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-
-            try {
-                Quizes qz = new Quizes();
-                Quiz quiz = qz.loadAllQuizzes().get(0); 
-                new QuizFram(quiz).setVisible(true);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    });
-}
-
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.ButtonGroup buttonGroup5;
-    private javax.swing.ButtonGroup buttonGroup6;
-    private javax.swing.ButtonGroup buttonGroup7;
-    private javax.swing.ButtonGroup buttonGroup8;
-    private javax.swing.ButtonGroup buttonGroup9;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
-    // End of variables declaration                   
+    // End of variables declaration
 }

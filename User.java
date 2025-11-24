@@ -13,7 +13,7 @@ import java.lang.reflect.Type;
 public class User {
     
     private static ArrayList<Student> students;
-    private static ArrayList<Instructor> instructors;
+   private static ArrayList<Instructor> instructors;
     private static ArrayList<admin> admins ;
     private String filename;
     
@@ -60,7 +60,7 @@ public class User {
 
         Map<String, Object> data = new HashMap<>();
         data.put("students", students);
-        data.put("instructors", instructors);
+        //data.put("instructors", instructors);
         data.put("admins", admins);
         gson.toJson(data, writer);
     } catch (Exception e) {
@@ -83,15 +83,15 @@ public class User {
     }
     public Instructor searchInstructorById(String email)
     {
-        
+
             for ( Instructor instructor : instructors )
             {
                 if ( instructor.getEmail().equals(email) )
                 {
                     return instructor ;
                 }
-            }    
-       
+            }
+
         return null;
     }
 

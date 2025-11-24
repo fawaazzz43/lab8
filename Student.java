@@ -1,4 +1,5 @@
 package lab7;
+import com.google.gson.JsonObject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -15,9 +16,8 @@ public class Student {
     String email;
     String passwordHash;
     ArrayList<Course> enrolledCourses;
-    double progress;
 
-    public Student(int userId, String role, String username, String email, String passwordHash, double progress) {
+    public Student(int userId, String role, String username, String email, String passwordHash) {
         this.userId = userId;
         this.role = role;
         this.username = username;
@@ -25,13 +25,12 @@ public class Student {
         this.passwordHash = passwordHash;
 
         this.enrolledCourses = new ArrayList<>();
-        this.progress = progress;
     }
 
     // --- FIXED SEARCH METHOD ---
     public ArrayList<Course> search(String word) {
         try {
-            String content = new String(Files.readAllBytes(Paths.get("D:\\programming\\java\\lab8\\lab8_downloaded_from_githiub\\lab7\\courses.json")));
+            String content = new String(Files.readAllBytes(Paths.get("D:\\programming\\java\\lab8\\lab8_v3\\courses.json")));
             JSONArray array = new JSONArray(content);
 
             ArrayList<Course> coursesOfSearch = new ArrayList<>();
@@ -52,16 +51,19 @@ public class Student {
                     );
 
                     // 2. CRITICAL FIX: Manually parse and add lessons to the course
-                    if (object.has("lessons")) {
+                    if (object.has("lessons"))
+                    {
                         JSONArray lessonsArray = object.getJSONArray("lessons");
-                        for (int j = 0; j < lessonsArray.length(); j++) {
-                            JSONObject lessonObj = lessonsArray.getJSONObject(j);
+                        for (int j = 0; j < lessonsArray.length(); j++)
+                        {
+                            JSONObject quizObj = lessonsArray.getJSONObject(j).getJSONObject("quiz");
 
+                            JSONObject lessonObj = lessonsArray.getJSONObject(j);
                             Lesson lesson = new Lesson(
                                     lessonObj.getInt("lessonId"),
                                     lessonObj.getString("title"),
                                     lessonObj.getString("content")
-                                    , (Quiz) lessonObj.get("quiz"));
+                                    , new Quiz ( quizObj.getString("title") , quizObj.getInt("numberOfQuestions")) );
 
                             course.getLessons().add(lesson);
                         }
@@ -73,8 +75,10 @@ public class Student {
             }
 
             if (!coursesOfSearch.isEmpty()) {
+                //System.out.println("vv");
                 return coursesOfSearch;
             } else {
+                //System.out.println("bb");
                 return null;
             }
         } catch (Exception e) {
@@ -89,7 +93,7 @@ public class Student {
         enrolledCourses.add(course);
 
         // Update the Course file (adds student to the course's student list)
-        Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_downloaded_from_githiub\\lab7\\courses.json");
+        Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_v3\\courses.json");
         courses.load();
         courses.UpdateStudentOfCourse(course, this);
         courses.SaveToJsonCourses();
@@ -100,7 +104,7 @@ public class Student {
 
     private void updateUserInUsersFile() {
         try {
-            String content = new String(Files.readAllBytes(Paths.get("users.json")));
+            String content = new String(Files.readAllBytes(Paths.get("D:\\programming\\java\\lab8\\lab8_v3\\users.json")));
             JSONObject jsonObj = new JSONObject(content);
             JSONArray students = jsonObj.getJSONArray("students");
 
@@ -108,9 +112,8 @@ public class Student {
             // Find and update the current student
             for (int i = 0; i < students.length(); i++) {
                 JSONObject studentObj = students.getJSONObject(i);
-                if (studentObj.getString("userId").equals(this.userId)) {
-                    // Update progress
-                    studentObj.put("progress", this.progress);
+                if (studentObj.getInt("userId") == this.userId) {
+                    
 
                     // Convert enrolledCourses to JSON array
                     JSONArray enrolledCoursesArray = new JSONArray();
@@ -139,7 +142,7 @@ public class Student {
             }
 
             // Write back to file
-            Files.write(Paths.get("users.json"), jsonObj.toString(4).getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            Files.write(Paths.get("D:\\programming\\java\\lab8\\lab8_v3\\users.json"), jsonObj.toString(4).getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -188,13 +191,5 @@ public class Student {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
-    }
-
-    public double getProgress() {
-        return progress;
-    }
-
-    public void setProgress(double progress) {
-        this.progress = progress;
     }
 }

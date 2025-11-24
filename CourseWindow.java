@@ -26,11 +26,10 @@ public class CourseWindow extends JFrame
         this.student = student;
         this.lessons = course.getLessons();
         initComponents();
-        
-        // 1. Call the method to generate checkboxes
-        addLessonCheckboxes(course.getLessons()); 
 
-        
+        // 1. Call the method to generate labels (instead of checkboxes)
+        addLessonCheckboxes(course.getLessons());
+
         updateEnrollButton();
     }
 
@@ -66,10 +65,9 @@ public class CourseWindow extends JFrame
         enrollButton = new JButton();
         enrollButton.setFont(new Font("Cambria", Font.BOLD, 20));
 
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); // Changed to DISPOSE to avoid closing the whole app
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel6.setText("Lessons Of Course");
-         // Ensure labels have text
 
         // Layout
         GroupLayout layout = new GroupLayout(getContentPane());
@@ -135,29 +133,23 @@ public class CourseWindow extends JFrame
         area.setWrapStyleWord(true);
         area.setEditable(false);
         area.setFont(new Font("Cambria", Font.BOLD, fontSize));
-        area.setOpaque(false); // Looks like JLabel
+        area.setOpaque(false);
         area.setBorder(null);
         return area;
     }
 
-    // 2. Implementation of the addLessonCheckboxes method
+    // *** UPDATED: checkboxes → labels ONLY ***
     private void addLessonCheckboxes(ArrayList<Lesson> lessons)
     {
-        lessonsPanel.removeAll(); // Clear previous components
+        lessonsPanel.removeAll();
 
         if (lessons != null && !lessons.isEmpty())
         {
             for (Lesson lesson : lessons)
             {
-                // Create a checkbox for each lesson
-                JCheckBox cb = new JCheckBox();
-                cb.setText(lesson.getTitle());
-                cb.setFont(new Font("Cambria", Font.PLAIN, 14));
-                
-                // If needed, you can add logic here to check the box if the student already completed it
-                // Example: if(student.isLessonCompleted(lesson)) cb.setSelected(true);
-
-                lessonsPanel.add(cb);
+                JLabel lbl = new JLabel(lesson.getTitle());
+                lbl.setFont(new Font("Cambria", Font.PLAIN, 14));
+                lessonsPanel.add(lbl);
             }
         }
         else
@@ -167,7 +159,6 @@ public class CourseWindow extends JFrame
             lessonsPanel.add(emptyLabel);
         }
 
-        // Refresh the panel to show changes
         lessonsPanel.revalidate();
         lessonsPanel.repaint();
     }
@@ -175,7 +166,6 @@ public class CourseWindow extends JFrame
     // Update enroll button text and behavior
     private void updateEnrollButton()
     {
-        // Check if the student is already enrolled by comparing Course IDs
         boolean isEnrolled = false;
         if (student != null && student.getEnrolledCourses() != null) {
             for (Course c : student.getEnrolledCourses()) {
@@ -190,31 +180,30 @@ public class CourseWindow extends JFrame
         {
             enrollButton.setText("ENROLLED");
             enrollButton.setEnabled(false);
-            // Enable lessons only if enrolled
             setLessonsEnabled(true);
         } else
         {
             enrollButton.setText("ENROLL");
             enrollButton.setEnabled(true);
-            // Disable lessons if not enrolled
             setLessonsEnabled(false);
-            
+
             enrollButton.addActionListener(e -> {
                 try
                 {
                     student.enroll(course);
                     enrollButton.setText("ENROLLED");
                     enrollButton.setEnabled(false);
-                    setLessonsEnabled(true); // Enable lessons after enrolling
+                    setLessonsEnabled(true);
                     JOptionPane.showMessageDialog(this, "You have successfully enrolled in " + course.getTitle());
+                    new StudentDashboardFrame(student);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             });
         }
     }
-    
-    // Helper to enable/disable checkboxes based on enrollment status
+
+    // Helper to enable/disable labels (won’t matter but left unchanged)
     private void setLessonsEnabled(boolean enabled) {
         Component[] components = lessonsPanel.getComponents();
         for (Component c : components) {

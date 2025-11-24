@@ -8,7 +8,34 @@ public class Course {
     private String description;
     private int instructorId;
     private String status ;
-    private ArrayList<Lesson> lessons = new ArrayList<>();;
+    private int numberOflessons;
+    private double progress;
+    private ArrayList<Lesson> lessoncompletion;
+
+    public double getProgress() {
+        return progress;
+    }
+
+    public void setProgress(double progress) {
+        this.progress = progress;
+    }
+
+    public ArrayList<Lesson> getLessoncompletion() {
+        return lessoncompletion;
+    }
+
+    public void setLessoncompletion(ArrayList<Lesson> lessoncompletion) {
+        this.lessoncompletion = lessoncompletion;
+    }
+
+    public int getNumberOflessons() {
+        return numberOflessons;
+    }
+
+    public void setNumberOflessons(int numberOflessons) {
+        this.numberOflessons = numberOflessons;
+    }
+    private ArrayList<Lesson> lessons = new ArrayList<>();
     private ArrayList<Student> studentsIncourse = new ArrayList<>();
 
     public void setCourseId(int courseId) {
@@ -69,8 +96,3 @@ public class Course {
 
 
 }
-
-
-
-
-

@@ -1,340 +1,113 @@
-{
-  "students": [
+{"students": [
     {
-      "userId": "1",
-      "role": "student",
-      "username": "ramy",
-      "email": "ramy@example.com",
-      "passwordHash": "hashed_password_123",
-      "progress": 0.0
+        "role": "student",
+        "enrolledCourses": [{
+            "numberOflessons": 0,
+            "description": "Get started with Machine Learning",
+            "progress": 0,
+            "title": "Machine Learning Basics",
+            "studentsIncourse": [{
+                "role": "student",
+                "userId": 2118,
+                "email": "hh@gmail.com",
+                "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+                "username": "hh"
+            }],
+            "courseId": 1234,
+            "instructorId": 5,
+            "status": "APPROVED",
+            "lessons": [{
+                "quiz": {
+                    "score": 0,
+                    "questions": [
+                        {
+                            "size": 4,
+                            "options": [
+                                "Learning without any data",
+                                "Learning with labeled data",
+                                "Learning using reinforcement",
+                                "Learning by trial only"
+                            ],
+                            "QuestionsId": 1,
+                            "correctAnswer": "Learning with labeled data",
+                            "questionText": "What is supervised learning?"
+                        },
+                        {
+                            "size": 4,
+                            "options": [
+                                "Classification",
+                                "Regression",
+                                "Clustering",
+                                "Reinforcement"
+                            ],
+                            "QuestionsId": 2,
+                            "correctAnswer": "Clustering",
+                            "questionText": "Which of the following is an example of unsupervised learning?"
+                        }
+                    ],
+                    "numberOfQuestions": 2,
+                    "title": "Machine Learning Basics Quiz"
+                },
+                "lessonId": 1,
+                "resources": [],
+                "title": "Introduction to Machine Learning",
+                "content": "This lesson introduces the basic concepts of Machine Learning, including supervised and unsupervised learning."
+            }]
+        }],
+        "userId": 2118,
+        "email": "hh@gmail.com",
+        "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "username": "hh"
     },
     {
-      "userId": "3",
-      "role": "student",
-      "username": "ahmed",
-      "email": "ahmed@example.com",
-      "passwordHash": "hashed_password_125",
-      "progress": 0.0
+        "role": "student",
+        "enrolledCourses": [
+            {
+                "numberOflessons": 0,
+                "progress": 0,
+                "title": "Machine Learning Basics",
+                "studentsIncourse": [],
+                "courseId": 1234,
+                "instructorId": 0,
+                "lessons": [{
+                    "lessonId": 1,
+                    "title": "Introduction to Machine Learning",
+                    "content": "This lesson introduces the basic concepts of Machine Learning, including supervised and unsupervised learning."
+                }]
+            },
+            {
+                "numberOflessons": 0,
+                "progress": 0,
+                "title": "Introduction to Java Programming",
+                "studentsIncourse": [],
+                "courseId": 101,
+                "instructorId": 0,
+                "lessons": [{
+                    "lessonId": 1,
+                    "title": "Java Environment and Basics",
+                    "content": "Understanding the JVM, JDK, and writing your first 'Hello World' program. Covers variables and data types."
+                }]
+            }
+        ],
+        "userId": 2005,
+        "email": "ss@gmail.com",
+        "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "username": "ss"
     },
     {
-      "userId": "5",
-      "role": "student",
-      "username": "charlie_brown",
-      "email": "charlie@example.com",
-      "passwordHash": "hashed_password",
-      "progress": 0.0
-    },
-    {
-      "userId": "9265",
-      "role": "student",
-      "username": "omar khaled",
-      "email": "omar@gmail.com",
-      "passwordHash": "123",
-      "progress": 0.0
-    },
-    {
-      "userId": "5477",
-      "role": "student",
-      "username": "omarkhaled",
-      "email": "omarkhaled@gmail.com",
-      "passwordHash": "123",
-      "progress": 0.0
-    },
-    {
-      "userId": "1124",
-      "role": "student",
-      "username": "mm",
-      "email": "mm@gmail.com",
-      "passwordHash": "1",
-      "enrolledCourses": [],
-      "progress": 0.0
-    },
-    {
-      "userId": "8493",
-      "role": "student",
-      "username": "nn",
-      "email": "nn@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-      "enrolledCourses": [],
-      "progress": 0.0
-    },
-    {
-      "userId": "9682",
-      "role": "student",
-      "username": "ahmd0",
-      "email": "ahmd0@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-      "enrolledCourses": [],
-      "progress": 0.0
-    },
-    {
-      "userId": "4565",
-      "role": "student",
-      "username": "ahmd1",
-      "email": "ahmd1@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-      "enrolledCourses": [
-        {
-          "courseId": "C101",
-          "title": "Java Basics",
-          "lessons": [],
-          "studentsIncourse": []
-        },
-        {
-          "courseId": "C202",
-          "title": "Data Structures",
-          "lessons": [],
-          "studentsIncourse": []
-        },
-        {
-          "courseId": "103",
-          "title": "Web Development with JavaScript",
-          "lessons": [],
-          "studentsIncourse": []
-        },
-        {
-          "courseId": "104",
-          "title": "Data Science Fundamentals",
-          "lessons": [],
-          "studentsIncourse": []
-        },
-        {
-          "courseId": "105",
-          "title": "Machine Learning Basics",
-          "lessons": [],
-          "studentsIncourse": []
-        }
-      ],
-      "progress": 0.0
-    },
-    {
-      "userId": "3432",
-      "role": "student",
-      "username": "ahmd2",
-      "email": "ahmd2@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-      "enrolledCourses": [],
-      "progress": 0.0
-    },
-    {
-      "userId": "4253",
-      "role": "student",
-      "username": "ahmd3",
-      "email": "ahmd3@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-      "enrolledCourses": [
-        {
-          "courseId": "102",
-          "title": "Data Structures",
-          "lessons": [],
-          "studentsIncourse": []
-        }
-      ],
-      "progress": 0.0
-    },
-    {
-      "userId": "6699",
-      "role": "student",
-      "username": "ahmd5",
-      "email": "ahmd5@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-      "enrolledCourses": [],
-      "progress": 0.0
-    },
-    {
-      "userId": "2332",
-      "role": "student",
-      "username": "ahmd6",
-      "email": "ahmd6@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-      "enrolledCourses": [
-        {
-          "courseId": "102",
-          "title": "Data Structures",
-          "lessons": [],
-          "studentsIncourse": []
-        }
-      ],
-      "progress": 0.0
-    },
-    {
-      "userId": "9626",
-      "role": "student",
-      "username": "ahmd7",
-      "email": "ahmd7@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-      "enrolledCourses": [
-        {
-          "courseId": "104",
-          "title": "Data Science Fundamentals",
-          "lessons": [],
-          "studentsIncourse": []
-        }
-      ],
-      "progress": 0.0
-    },
-    {
-      "userId": "958",
-      "role": "student",
-      "username": "ahmd10",
-      "email": "ahmd10@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-      "enrolledCourses": [
-        {
-          "courseId": "101",
-          "title": "Java Basics",
-          "lessons": [],
-          "studentsIncourse": []
-        }
-      ],
-      "progress": 0.0
-    },
-    {
-      "userId": "5543",
-      "role": "student",
-      "username": "ahmd11",
-      "email": "ahmd11@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-      "enrolledCourses": [
-        {
-          "courseId": "104",
-          "title": "Data Science Fundamentals",
-          "lessons": [],
-          "studentsIncourse": []
-        }
-      ],
-      "progress": 0.0
-    },
-    {
-      "userId": "5613",
-      "role": "student",
-      "username": "ahmd12",
-      "email": "ahmd12@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-      "enrolledCourses": [
-        {
-          "courseId": "104",
-          "title": "Data Science Fundamentals",
-          "lessons": [],
-          "studentsIncourse": []
-        }
-      ],
-      "progress": 0.0
-    },
-    {
-      "userId": "8668",
-      "role": "student",
-      "username": "ahmd13",
-      "email": "ahmd13@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-      "enrolledCourses": [
-        {
-          "courseId": "104",
-          "title": "Data Science Fundamentals",
-          "lessons": [],
-          "studentsIncourse": []
-        }
-      ],
-      "progress": 0.0
-    },
-    {
-      "userId": "8393",
-      "role": "student",
-      "username": "ahmd34",
-      "email": "ahmd34@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-      "enrolledCourses": [
-        {
-          "courseId": "103",
-          "title": "Web Development with JavaScript",
-          "lessons": [],
-          "studentsIncourse": []
-        }
-      ],
-      "progress": 0.0
-    },
-    {
-      "userId": "9422",
-      "role": "student",
-      "username": "aa",
-      "email": "aa@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-      "enrolledCourses": [],
-      "progress": 0.0
+        "role": "student",
+        "enrolledCourses": [{
+            "title": "Introduction to Java Programming",
+            "courseId": 101,
+            "lessons": [{
+                "lessonId": 1,
+                "title": "Java Environment and Basics",
+                "content": "Understanding the JVM, JDK, and writing your first 'Hello World' program. Covers variables and data types."
+            }]
+        }],
+        "userId": 4528,
+        "email": "dd@gmail.com",
+        "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "username": "dd"
     }
-  ],
-  "admins": [
-    {
-      "userId": "9001",
-      "role": "admin",
-      "username": "admin1",
-      "email": "admin1@example.com",
-      "passwordHash": "admin_pass_1"
-    },
-    {
-      "userId": "9002",
-      "role": "admin",
-      "username": "admin2",
-      "email": "admin2@example.com",
-      "passwordHash": "admin_pass_2"
-    },
-    {
-      "userId": "2338",
-      "role": "admin",
-      "username": "aa",
-      "email": "aa@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
-    },
-    {
-      "userId": "8428",
-      "role": "admin",
-      "username": "aa",
-      "email": "aa@gmail.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
-    },
-    {
-      "userId": "1016",
-      "role": "admin",
-      "username": "aa",
-      "email": "aa@gamil.com",
-      "passwordHash": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"
-    }
-  ],
-  "instructors": [
-    {
-      "userId": "2",
-      "role": "instructor",
-      "username": "omar",
-      "email": "omar@example.com",
-      "passwordHash": "hashed_password_124"
-    },
-    {
-      "userId": "4",
-      "role": "instructor",
-      "username": "mohamed",
-      "email": "mohamed@example.com",
-      "passwordHash": "hashed_password_126"
-    },
-    {
-      "userId": "5",
-      "role": "instructor",
-      "username": "samy",
-      "email": "samy@example.com",
-      "passwordHash": "hashed_password_127"
-    },
-    {
-      "userId": "5419",
-      "role": "instructor",
-      "username": "omarkhaled",
-      "email": "omrkhaled@gmail.com",
-      "passwordHash": "123"
-    },
-    {
-      "userId": "276",
-      "role": "instructor",
-      "username": "ooo",
-      "email": "oo",
-      "passwordHash": "1234"
-    }
-  ]
-}
+]}

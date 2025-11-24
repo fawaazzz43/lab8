@@ -13,7 +13,7 @@ import java.io.FileWriter;
 public class SignUp {
 
     private ArrayList<Student> allStudents;
-    private ArrayList<Instructor> allInstructors;
+    //private ArrayList<Instructor> allInstructors;
     private ArrayList<admin> allAdmins ;
     private User user;
     
@@ -21,10 +21,10 @@ public class SignUp {
 
 
     public SignUp() {
-        this.user = new User("users.json");
+        this.user = new User("D:\\programming\\java\\lab8\\lab8_v3\\users.json");
         user.load();
         this.allStudents = user.getStudents() != null ? user.getStudents() : new ArrayList<>();
-        this.allInstructors = user.getInstructors() != null ? user.getInstructors() : new ArrayList<>();
+        //this.allInstructors = user.getInstructors() != null ? user.getInstructors() : new ArrayList<>();
         this.allAdmins = user.getAdmins() != null ? user.getAdmins() : new ArrayList<>();
         user.save();
     }
@@ -39,12 +39,12 @@ public class SignUp {
         user.save();
        
     }
-    public void AddInstructor(Instructor instructor) {
-        
-        allInstructors.add(instructor);
-        user.save();
-        
-    }
+//    public void AddInstructor(Instructor instructor) {
+//
+//        allInstructors.add(instructor);
+//        user.save();
+//
+//    }
     public void AddAdmin(admin admin)
     {
         allAdmins.add(admin);
@@ -60,11 +60,11 @@ public class SignUp {
             }
         }
 
-        for ( Instructor instructor : allInstructors) {
-            if (instructor.getUserId()==(userId)) {
-                return true;
-            }
-        }
+//        for ( Instructor instructor : allInstructors) {
+//            if (instructor.getUserId()==(userId)) {
+//                return true;
+//            }
+//        }
 
         for  ( admin ad : allAdmins)
         {
@@ -84,11 +84,11 @@ public class SignUp {
                 return 2;
             }
         }
-        for (Instructor instructor : allInstructors) {
-            if (instructor.getEmail().equals(email)) {
-                return 2;
-            }
-        }
+//        for (Instructor instructor : allInstructors) {
+//            if (instructor.getEmail().equals(email)) {
+//                return 2;
+//            }
+//        }
         return 0;
     }
 

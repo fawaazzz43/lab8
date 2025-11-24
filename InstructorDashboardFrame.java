@@ -7,6 +7,8 @@ package lab7;
 import java.awt.HeadlessException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,8 +19,11 @@ import javax.swing.table.DefaultTableModel;
 public class InstructorDashboardFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InstructorDashboardFrame.class.getName());
-    Courses courses= new Courses("courses.json");
+    Courses courses= new Courses("D:\\programming\\java\\lab8\\lab8_v3\\courses.json");
+     User user=new User("D:\\programming\\java\\lab8\\lab8_v3\\users.json");
     Instructor instructor;
+    private Quiz quiz;
+    private Questions question;
     /**
      * Creates new form InstructorDashboardFrame
      * @param instructor
@@ -28,6 +33,7 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         initComponents();
         this.instructor=instructor; 
         courses.load();
+        user.load();
         Home.setVisible(true);
         Createcourse.setVisible(false);
         Editcourse.setVisible(false);
@@ -58,6 +64,8 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jButton24 = new javax.swing.JButton();
+        jButton25 = new javax.swing.JButton();
         Createcourse = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
@@ -124,6 +132,48 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         jButton22 = new javax.swing.JButton();
+        PerformanceAnalytics = new javax.swing.JPanel();
+        jButton30 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jButton29 = new javax.swing.JButton();
+        jButton31 = new javax.swing.JButton();
+        jButton32 = new javax.swing.JButton();
+        jButton33 = new javax.swing.JButton();
+        jButton34 = new javax.swing.JButton();
+        Addquestion = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jTextField32 = new javax.swing.JTextField();
+        jTextField33 = new javax.swing.JTextField();
+        jTextField34 = new javax.swing.JTextField();
+        jTextField35 = new javax.swing.JTextField();
+        jTextField36 = new javax.swing.JTextField();
+        jTextField37 = new javax.swing.JTextField();
+        jButton35 = new javax.swing.JButton();
+        jButton37 = new javax.swing.JButton();
+        jTextField25 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField38 = new javax.swing.JTextField();
+        Addquiz = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField24 = new javax.swing.JTextField();
+        jButton36 = new javax.swing.JButton();
+        jButton28 = new javax.swing.JButton();
+        jButton23 = new javax.swing.JButton();
+        Updatequiz = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField43 = new javax.swing.JTextField();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTable10 = new javax.swing.JTable();
+        jButton26 = new javax.swing.JButton();
+        jButton27 = new javax.swing.JButton();
+        jButton38 = new javax.swing.JButton();
+        jButton39 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -158,6 +208,7 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         });
 
         jButton4.setText("Create Lesson");
+        jButton4.setActionCommand("Create Lesson And quiz");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -171,7 +222,7 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText("Delete Lesson");
+        jButton6.setText("Delete Lesson and Quiz");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -185,13 +236,32 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton24.setText("Update Quiz");
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
+
+        jButton25.setText("View Performance Analytics");
+
         javax.swing.GroupLayout HomeLayout = new javax.swing.GroupLayout(Home);
         Home.setLayout(HomeLayout);
         HomeLayout.setHorizontalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(300, 300, 300))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
+                        .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(273, 273, 273))))
             .addGroup(HomeLayout.createSequentialGroup()
-                .addGap(262, 262, 262)
+                .addGap(247, 247, 247)
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton25)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -201,31 +271,31 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
                         .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))
                 .addContainerGap(251, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(300, 300, 300))
         );
         HomeLayout.setVerticalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(jButton24)
+                .addGap(18, 18, 18)
+                .addComponent(jButton25)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         getContentPane().add(Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 590));
@@ -235,6 +305,7 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         jTextField2.setEditable(false);
         jTextField2.setText("Enter CourseId");
 
+        jTextField3.setEditable(false);
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -640,6 +711,11 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         jTextField18.setText("Enter lessonId");
 
         jTextField19.setEditable(false);
+        jTextField19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField19ActionPerformed(evt);
+            }
+        });
 
         jTextField20.setEditable(false);
         jTextField20.setText("Enter title");
@@ -739,17 +815,18 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Createlesson.setLayout(CreatelessonLayout);
         CreatelessonLayout.setHorizontalGroup(
             CreatelessonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CreatelessonLayout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(jButton14)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CreatelessonLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(CreatelessonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CreatelessonLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CreatelessonLayout.createSequentialGroup()
+                        .addGap(180, 180, 180)
+                        .addComponent(jButton14)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(CreatelessonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton16)
                     .addGroup(CreatelessonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton16)
                         .addComponent(jTextField18)
                         .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -781,10 +858,10 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
                     .addGroup(CreatelessonLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton16)
-                .addGap(8, 8, 8)
-                .addComponent(jButton14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(CreatelessonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton14)
+                    .addComponent(jButton16))
                 .addGap(50, 50, 50))
         );
 
@@ -1143,7 +1220,6 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         jScrollPane7.setViewportView(jTable7);
 
         jButton21.setText("Select Course");
-        jButton21.setActionCommand("Select Course");
         jButton21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton21ActionPerformed(evt);
@@ -1236,10 +1312,458 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
                 .addGroup(ViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton21)
                     .addComponent(jButton22))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         getContentPane().add(View, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        PerformanceAnalytics.setPreferredSize(new java.awt.Dimension(690, 570));
+
+        jButton30.setText("Back");
+        jButton30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton30ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText(" analytics visually");
+
+        jButton29.setText("Quizaveragesperlesson");
+        jButton29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton29ActionPerformed(evt);
+            }
+        });
+
+        jButton31.setText("Studentperformance");
+        jButton31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton31ActionPerformed(evt);
+            }
+        });
+
+        jButton32.setText("CompletionPercentagesLesson");
+        jButton32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton32ActionPerformed(evt);
+            }
+        });
+
+        jButton33.setText("CompletionPercentagesCourse");
+        jButton33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton33ActionPerformed(evt);
+            }
+        });
+
+        jButton34.setText("CompletionPercentagesStudent");
+        jButton34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton34ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PerformanceAnalyticsLayout = new javax.swing.GroupLayout(PerformanceAnalytics);
+        PerformanceAnalytics.setLayout(PerformanceAnalyticsLayout);
+        PerformanceAnalyticsLayout.setHorizontalGroup(
+            PerformanceAnalyticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PerformanceAnalyticsLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton32)
+                .addGap(223, 223, 223))
+            .addGroup(PerformanceAnalyticsLayout.createSequentialGroup()
+                .addGroup(PerformanceAnalyticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton33)
+                    .addGroup(PerformanceAnalyticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PerformanceAnalyticsLayout.createSequentialGroup()
+                            .addGap(274, 274, 274)
+                            .addComponent(jButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(PerformanceAnalyticsLayout.createSequentialGroup()
+                            .addGap(216, 216, 216)
+                            .addComponent(jButton34))
+                        .addGroup(PerformanceAnalyticsLayout.createSequentialGroup()
+                            .addGap(289, 289, 289)
+                            .addComponent(jLabel5))
+                        .addGroup(PerformanceAnalyticsLayout.createSequentialGroup()
+                            .addGap(251, 251, 251)
+                            .addComponent(jButton29))
+                        .addGroup(PerformanceAnalyticsLayout.createSequentialGroup()
+                            .addGap(260, 260, 260)
+                            .addComponent(jButton31))))
+                .addContainerGap(237, Short.MAX_VALUE))
+        );
+        PerformanceAnalyticsLayout.setVerticalGroup(
+            PerformanceAnalyticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PerformanceAnalyticsLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel5)
+                .addGap(32, 32, 32)
+                .addComponent(jButton29)
+                .addGap(62, 62, 62)
+                .addComponent(jButton31)
+                .addGap(51, 51, 51)
+                .addComponent(jButton32)
+                .addGap(65, 65, 65)
+                .addComponent(jButton33)
+                .addGap(71, 71, 71)
+                .addComponent(jButton34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addComponent(jButton30)
+                .addGap(35, 35, 35))
+        );
+
+        getContentPane().add(PerformanceAnalytics, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        Addquestion.setPreferredSize(new java.awt.Dimension(690, 570));
+
+        jLabel3.setText("questionText");
+
+        jLabel6.setText("correctAnswer");
+
+        jLabel7.setText("option1");
+
+        jLabel8.setText("option2");
+
+        jLabel9.setText("option3");
+
+        jLabel10.setText("option4");
+
+        jLabel11.setText("size");
+
+        jButton35.setText("ok");
+        jButton35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton35ActionPerformed(evt);
+            }
+        });
+
+        jButton37.setText("Back");
+
+        jTextField25.setEditable(false);
+
+        jLabel2.setText("Questionid");
+
+        jTextField38.setEditable(false);
+
+        javax.swing.GroupLayout AddquestionLayout = new javax.swing.GroupLayout(Addquestion);
+        Addquestion.setLayout(AddquestionLayout);
+        AddquestionLayout.setHorizontalGroup(
+            AddquestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddquestionLayout.createSequentialGroup()
+                .addGap(310, 310, 310)
+                .addGroup(AddquestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(AddquestionLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(AddquestionLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(AddquestionLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(AddquestionLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(AddquestionLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(AddquestionLayout.createSequentialGroup()
+                .addGroup(AddquestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AddquestionLayout.createSequentialGroup()
+                        .addGap(292, 292, 292)
+                        .addGroup(AddquestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addGroup(AddquestionLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6)))
+                    .addGroup(AddquestionLayout.createSequentialGroup()
+                        .addGap(283, 283, 283)
+                        .addGroup(AddquestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton35)
+                            .addComponent(jButton37)
+                            .addComponent(jTextField38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(AddquestionLayout.createSequentialGroup()
+                        .addGap(289, 289, 289)
+                        .addGroup(AddquestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(303, Short.MAX_VALUE))
+        );
+        AddquestionLayout.setVerticalGroup(
+            AddquestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddquestionLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addGap(1, 1, 1)
+                .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addGap(13, 13, 13)
+                .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addGap(8, 8, 8)
+                .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jButton35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton37)
+                .addGap(9, 9, 9))
+        );
+
+        getContentPane().add(Addquestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        Addquiz.setPreferredSize(new java.awt.Dimension(690, 570));
+
+        jLabel1.setText("Enter Title");
+
+        jTextField24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField24ActionPerformed(evt);
+            }
+        });
+
+        jButton36.setText("ok");
+        jButton36.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton36ActionPerformed(evt);
+            }
+        });
+
+        jButton28.setText("Back");
+        jButton28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton28ActionPerformed(evt);
+            }
+        });
+
+        jButton23.setText("Add Questions");
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AddquizLayout = new javax.swing.GroupLayout(Addquiz);
+        Addquiz.setLayout(AddquizLayout);
+        AddquizLayout.setHorizontalGroup(
+            AddquizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddquizLayout.createSequentialGroup()
+                .addGap(314, 314, 314)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddquizLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(AddquizLayout.createSequentialGroup()
+                .addGap(304, 304, 304)
+                .addComponent(jButton36)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(AddquizLayout.createSequentialGroup()
+                .addGap(279, 279, 279)
+                .addComponent(jButton23)
+                .addContainerGap(285, Short.MAX_VALUE))
+            .addGroup(AddquizLayout.createSequentialGroup()
+                .addGap(306, 306, 306)
+                .addComponent(jButton28)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        AddquizLayout.setVerticalGroup(
+            AddquizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddquizLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jLabel1)
+                .addGap(27, 27, 27)
+                .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addComponent(jButton36)
+                .addGap(55, 55, 55)
+                .addComponent(jButton23)
+                .addGap(34, 34, 34)
+                .addComponent(jButton28)
+                .addContainerGap(234, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(Addquiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        Updatequiz.setPreferredSize(new java.awt.Dimension(690, 570));
+
+        jLabel4.setText("Enter Title");
+
+        jTextField43.setEditable(false);
+
+        jTable10.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "num", "courseId", "LessonId", "Title", "Content", "Title of quiz"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane10.setViewportView(jTable10);
+
+        jButton26.setText("Select");
+        jButton26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton26ActionPerformed(evt);
+            }
+        });
+
+        jButton27.setText("ok");
+
+        jButton38.setText("Back");
+        jButton38.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton38ActionPerformed(evt);
+            }
+        });
+
+        jButton39.setText("Back");
+        jButton39.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton39ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout UpdatequizLayout = new javax.swing.GroupLayout(Updatequiz);
+        Updatequiz.setLayout(UpdatequizLayout);
+        UpdatequizLayout.setHorizontalGroup(
+            UpdatequizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UpdatequizLayout.createSequentialGroup()
+                .addGap(188, 188, 188)
+                .addComponent(jButton26)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdatequizLayout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(UpdatequizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdatequizLayout.createSequentialGroup()
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addGroup(UpdatequizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdatequizLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(46, 46, 46))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdatequizLayout.createSequentialGroup()
+                                .addGroup(UpdatequizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton27)
+                                    .addComponent(jTextField43, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(36, 36, 36))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UpdatequizLayout.createSequentialGroup()
+                        .addComponent(jButton39)
+                        .addGap(92, 92, 92))))
+            .addGroup(UpdatequizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(UpdatequizLayout.createSequentialGroup()
+                    .addGap(309, 309, 309)
+                    .addComponent(jButton38)
+                    .addContainerGap(309, Short.MAX_VALUE)))
+        );
+        UpdatequizLayout.setVerticalGroup(
+            UpdatequizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UpdatequizLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(UpdatequizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(UpdatequizLayout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton27)))
+                .addGap(18, 18, 18)
+                .addComponent(jButton26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jButton39)
+                .addGap(37, 37, 37))
+            .addGroup(UpdatequizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(UpdatequizLayout.createSequentialGroup()
+                    .addGap(273, 273, 273)
+                    .addComponent(jButton38)
+                    .addContainerGap(273, Short.MAX_VALUE)))
+        );
+
+        getContentPane().add(Updatequiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1253,11 +1777,16 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(false);
         Deletelesson.setVisible(false);
         View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0); // clear existing rows
 
         int counter = 1;
-        for (Course  course : courses.getCourses()) {
+        for (Course  course : instructor.getCreatedCourses()) {
             Object[] row = {
                     counter++,
                 course.getCourseId(),
@@ -1279,7 +1808,14 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(false);
         Deletelesson.setVisible(false);
         View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+        
         jTextField9.setText(String.valueOf(instructor.getUserId()));
+        jTextField9.setText(String.valueOf(1000+courses.getCourses().size()));
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -1295,11 +1831,16 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(false);
         Deletelesson.setVisible(false);
         View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+        
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0); // clear existing rows
 
         int counter = 1;
-        for (Course  course : courses.getCourses()) {
+        for (Course  course : instructor.getCreatedCourses()) {
             Object[] row = {
                     counter++,
                 course.getCourseId(),
@@ -1320,11 +1861,16 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(false);
         Deletelesson.setVisible(false);
         View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+        
         DefaultTableModel model = (DefaultTableModel) jTable6.getModel();
         model.setRowCount(0); // clear existing rows
 
         int counter = 1;
-        for (Course  course : courses.getCourses()) {
+        for (Course  course : this.instructor.getCreatedCourses()) {
             Object[] row = {
                     counter++,
                 course.getCourseId(),
@@ -1345,11 +1891,15 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(true);
         Deletelesson.setVisible(false);
         View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
         model.setRowCount(0); // clear existing rows
 
         int counter = 1;
-        for (Course  course : courses.getCourses()) {
+        for (Course  course : this.instructor.getCreatedCourses()) {
             for(Lesson lesson : course.getLessons())
             {Object[] row = {
                     counter++,
@@ -1371,11 +1921,16 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(false);
         Deletelesson.setVisible(true);
         View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+        
         DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
         model.setRowCount(0); // clear existing rows
 
         int counter = 1;
-        for (Course  course : courses.getCourses()) {
+        for (Course  course : this.instructor.getCreatedCourses()) {
             for(Lesson lesson : course.getLessons())
             {Object[] row = {
                     counter++,
@@ -1397,10 +1952,14 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(false);
         Deletelesson.setVisible(false);
         View.setVisible(true);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
         DefaultTableModel model = (DefaultTableModel) jTable7.getModel();
         model.setRowCount(0); // clear existing rows
         int counter = 1;
-        for (Course  course : courses.getCourses()) {
+        for (Course  course : instructor.getCreatedCourses()) {
             Object[] row = {
                     counter++,
                 course.getCourseId(),
@@ -1417,7 +1976,7 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        int courseid=0;
+        int courseid=1000+courses.getCourses().size();
         String title=null;
         String description=null;
         if(jTextField5.getText()!=null)
@@ -1438,97 +1997,58 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
                                 JOptionPane.ERROR_MESSAGE);
         }
         
-        int InstructorId=0;
- 
-        try{Integer.valueOf(jTextField3.getText());
-        if(Integer.parseInt(jTextField3.getText()) > 999)
-                courseid=Integer.parseInt(jTextField3.getText());
-                        else{
-            JOptionPane.showMessageDialog(this,
-                                "❌id must be greater than 999",
-                                "Invalid ID",
-                                JOptionPane.ERROR_MESSAGE);
-            jTextField3.setText("");
-        }
-            }
-        catch(HeadlessException | NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(this,
-                                "❌id must be Integer",
-                                "Invalid ID",
-                                JOptionPane.ERROR_MESSAGE);
-            jTextField3.setText("");
-            
-        }
-        try{Integer.valueOf(jTextField9.getText());
-        if(Integer.parseInt(jTextField9.getText()) > 999)
-                InstructorId=Integer.parseInt(jTextField9.getText());
-                        else{
-            JOptionPane.showMessageDialog(this,
-                                "❌id must be greater than 999",
-                                "Invalid ID",
-                                JOptionPane.ERROR_MESSAGE);
-            jTextField9.setText("");
-        }}
-        catch(HeadlessException | NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(this,
-                                "❌id ust be Integer",
-                                "Invalid ID",
-                                JOptionPane.ERROR_MESSAGE);
-            jTextField9.setText("");
-            
-        }
-        if(courseid != 0 && title != null && InstructorId != 0 && description != null)
+        if(title != null && description != null)
         {
             try {
                 instructor.Createcourse( courseid, title, description );
             } catch (IOException ex) {
                 System.getLogger(InstructorDashboardFrame.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
-            jTextField3.setText("");
             jTextField5.setText("");
             jTextField7.setText("");
+            JOptionPane.showMessageDialog(this,
+                                "❌you must create lesson",
+                                "lesson createion",
+                                JOptionPane.INFORMATION_MESSAGE);
+           Home.setVisible(false);
+        Createcourse.setVisible(false);
+        Editcourse.setVisible(false);
+        Deletecourse.setVisible(false);
+        Createlesson.setVisible(true);
+        Editlesson.setVisible(false);
+        Deletelesson.setVisible(false);
+        View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+        DefaultTableModel model = (DefaultTableModel) jTable6.getModel();
+        model.setRowCount(0); // clear existing rows
+
+        int counter = 1;
+        for (Course  course : courses.getCourses()) {
+            Object[] row = {
+                    counter++,
+                course.getCourseId(),
+                    course.getTitle(),
+                    course.getDescription(),
+                    course.getInstructorId()
+            };
+            model.addRow(row);
+        }   
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
        
-        int courseid=0;
         String title=jTextField13.getText();
         String description=jTextField15.getText();
-        int InstructorId= instructor.getUserId();
-        boolean flag1=true;
-        if(jTextField11.getText()!=null){
-        try{Integer.valueOf(jTextField11.getText());
-        if(Integer.parseInt(jTextField11.getText()) > 999)
-                courseid=Integer.parseInt(jTextField11.getText());
-                        else{
-            JOptionPane.showMessageDialog(this,
-                                "❌id must be greater than 999",
-                                "Invalid ID",
-                                JOptionPane.ERROR_MESSAGE);
-            jTextField11.setText("");
-            flag1=false;
-        }
-            }
-        catch(HeadlessException | NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(this,
-                                "❌id must be Integer",
-                                "Invalid ID",
-                                JOptionPane.ERROR_MESSAGE);
-            jTextField11.setText("");
-            flag1=false;
-            
-        }}
-        if(flag1)
-        {    
+        int InstructorId= instructor.getUserId(); 
             
             for(Course c : courses.getCourses())
                 if(c.getCourseId()==Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString()))
                     try {
-                        instructor.Editcourse(c,courseid, title, description, InstructorId);
+                        instructor.Editcourse(c,1000+courses.getCourses().size(), title, description, InstructorId);
             } catch (IOException ex) {
                 System.getLogger(InstructorDashboardFrame.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
@@ -1545,7 +2065,6 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
                 };
                 model.addRow(row);
             }
-        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
@@ -1573,6 +2092,11 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(false);
         Deletelesson.setVisible(false);
         View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+       
     }//GEN-LAST:event_BackActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -1584,6 +2108,11 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(false);
         Deletelesson.setVisible(false);
         View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+        
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -1593,11 +2122,12 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
 } else { 
         int option=JOptionPane.showConfirmDialog(this, "Are you sure you want to Update this student?", "Update",JOptionPane.YES_NO_OPTION);
         if(option==0){
-            jTextField11.setEditable(true);
+            jTextField11.setEditable(false);
             jTextField13.setEditable(true);
             jTextField15.setEditable(true);
             jTextField17.setEditable(false);
             jTextField17.setText(String.valueOf(instructor.getUserId()));
+            jTextField11.setText(String.valueOf(1000+courses.getCourses().size()));
             jButton9.setEnabled(true);
         }}
     }//GEN-LAST:event_jButton11ActionPerformed
@@ -1640,6 +2170,11 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(false);
         Deletelesson.setVisible(false);
         View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+       
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
@@ -1649,10 +2184,26 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
 } else { 
         int option=JOptionPane.showConfirmDialog(this, "Are you sure you want to Update this student?", "Update",JOptionPane.YES_NO_OPTION);
         if(option==0){
-            jTextField19.setEditable(true);
+            jTextField19.setEditable(false);
+            for(Course c : courses.getCourses())
+                if(c.getCourseId()==Integer.parseInt(jTable6.getValueAt(jTable6.getSelectedRow(),1).toString()))
+                    jTextField19.setText(String.valueOf( c.getNumberOflessons()+1000));
             jTextField21.setEditable(true);
             jTextField23.setEditable(true);
             jButton15.setEnabled(true);
+            Home.setVisible(false);
+        Createcourse.setVisible(false);
+        Editcourse.setVisible(false);
+        Deletecourse.setVisible(false);
+        Createlesson.setVisible(false);
+        Editlesson.setVisible(false);
+        Deletelesson.setVisible(false);
+        View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(true);
+        
         }}
     }//GEN-LAST:event_jButton14ActionPerformed
 
@@ -1681,32 +2232,15 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
                                 "Empty",
                                 JOptionPane.ERROR_MESSAGE);
         }
- 
-        try{Integer.valueOf(jTextField19.getText());
-        if(Integer.parseInt(jTextField19.getText()) > 999)
-                lessonid=Integer.parseInt(jTextField19.getText());
-                        else{
-            JOptionPane.showMessageDialog(this,
-                                "❌id must be greater than 999",
-                                "Invalid ID",
-                                JOptionPane.ERROR_MESSAGE);
-            jTextField19.setText("");
-        }
-            }
-        catch(HeadlessException | NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(this,
-                                "❌id must be Integer",
-                                "Invalid ID",
-                                JOptionPane.ERROR_MESSAGE);
-            jTextField19.setText("");
-            
-        }
-        if(lessonid != 0 && title != null && content != null)
+        if(title != null && content != null)
         {
             for(Course c : courses.getCourses())
                 if(c.getCourseId()==Integer.parseInt(jTable6.getValueAt(jTable6.getSelectedRow(),1).toString()))
-                    instructor.Createlesson(c,lessonid,title, content);
+                    try {
+                        instructor.Createlesson(c,c.getCourseId()+1000,title, content,this.quiz);
+            } catch (IOException ex) {
+                System.getLogger(InstructorDashboardFrame.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
         }
     }//GEN-LAST:event_jButton15ActionPerformed
 
@@ -1719,6 +2253,11 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(false);
         Deletelesson.setVisible(false);
         View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+       
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
@@ -1797,6 +2336,11 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(false);
         Deletelesson.setVisible(false);
         View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+        
     }//GEN-LAST:event_Back1ActionPerformed
 
     private void jTextField31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField31ActionPerformed
@@ -1861,6 +2405,11 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(false);
         Deletelesson.setVisible(false);
         View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+        
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
@@ -1878,8 +2427,7 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
                     counter++,
                 student.getUserId(),
                     student.getRole(),
-                    student.getUsername(),
-                    student.getProgress()
+                    student.getUsername()
             };
             model.addRow(row);}
         }
@@ -1894,17 +2442,356 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(false);
         Deletelesson.setVisible(false);
         View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+        
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField9ActionPerformed
 
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+       Home.setVisible(false);
+        Createcourse.setVisible(false);
+        Editcourse.setVisible(false);
+        Deletecourse.setVisible(false);
+        Createlesson.setVisible(false);
+        Editlesson.setVisible(false);
+        Deletelesson.setVisible(false);
+        View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(true);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+       
+        jTextField43.setEditable(false);
+            jButton27.setEnabled(false);
+        DefaultTableModel model = (DefaultTableModel) jTable10.getModel();
+        model.setRowCount(0); // clear existing rows
+
+        int counter = 1;
+        for (Course  course : this.instructor.getCreatedCourses()) {
+            for(Lesson lesson : course.getLessons())
+            {Object[] row = {
+                    counter++,
+                course.getCourseId(),
+                    lesson.getLessonId(),
+                    lesson.getTitle(),
+                    lesson.getContent(),
+                    lesson.getQuiz().getTitle()
+            };
+            model.addRow(row);}
+        }
+    }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
+       Home.setVisible(true);
+        Createcourse.setVisible(false);
+        Editcourse.setVisible(false);
+        Deletecourse.setVisible(false);
+        Createlesson.setVisible(false);
+        Editlesson.setVisible(false);
+        Deletelesson.setVisible(false);
+        View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+    }//GEN-LAST:event_jButton30ActionPerformed
+
+    private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
+        this.dispose();
+         Map<String, Double> quizAverages = new HashMap<>();
+    int sum=0;
+          int n=0;
+          for(Course course : this.instructor.getCreatedCourses())
+            for(Lesson lesson : course.getLessons()){
+                  for(Student student : course.getStudentsIncourse())
+                      for(Course c : student.getEnrolledCourses())
+                          if(course.getCourseId()==c.getCourseId()){
+                              for(Lesson l : course.getLessons())
+                                  if(l.getLessonId()==lesson.getLessonId()){
+                  sum+=lesson.getQuiz().getScore();
+                  n+=1;
+                                  break;} 
+                              break;}
+               quizAverages.put(String.valueOf(lesson.getLessonId())+"in"+course.getTitle(), (double)sum/(double)n);
+               n=sum=0;}
+          
+        try {
+            new ChartFrame("Quiz Averages per Lesson", "Lesson ID in course", "Average Score", quizAverages,this.instructor).setVisible(true);
+        } catch (IOException ex) {
+            System.getLogger(InstructorDashboardFrame.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_jButton29ActionPerformed
+
+    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+        this.dispose();
+         Map<String, Double> averages = new HashMap<>();
+          int sum=0;
+          int n=0;
+          for(Student student : user.getStudents()){
+              for(Course course : student.getEnrolledCourses())
+                  for(Lesson lesson : course.getLessons())
+                  {sum+=lesson.getQuiz().getScore();
+                  n+=1;}
+               averages.put(student.getUsername(), (double)sum/(double)n);
+               n=sum=0;
+          }
+
+        try {
+            new ChartFrame("Student Performance", "Student", "Average Score", averages,this.instructor).setVisible(true);
+        } catch (IOException ex) {
+            System.getLogger(InstructorDashboardFrame.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_jButton31ActionPerformed
+
+    private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
+        Map<String, Double> completionPercentages = new HashMap<>();
+          int sum=0;
+          int n=0;
+          for(Course course : this.instructor.getCreatedCourses())
+            for(Lesson lesson : course.getLessons()){
+                  for(Student student : course.getStudentsIncourse())
+                      for(Course c : student.getEnrolledCourses())
+                          if(course.getCourseId()==c.getCourseId()){
+                              for(Lesson l : course.getLessons())
+                                  if(l.getLessonId()==lesson.getLessonId()){
+                                      if(lesson.getQuiz().getScore()>= (float)lesson.getQuiz().getnumberOfQuestions()/2.0)
+                                           sum+=1;
+                                            n+=1;
+                                  break;} 
+                              break;}
+              completionPercentages.put(String.valueOf(lesson.getLessonId())+"in"+course.getTitle(), (double)sum/(double)n);
+               n=sum=0;}
+        
+        try {
+            new ChartFrame("Completion Percentages", "Lesson ID in course", "Completion %", completionPercentages,this.instructor).setVisible(true);
+        } catch (IOException ex) {
+            System.getLogger(InstructorDashboardFrame.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_jButton32ActionPerformed
+
+    private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
+        this.dispose();
+        Map<String, Double> completionPercentages = new HashMap<>();
+          double sum=0;
+          int n=0;
+          for(Course course : this.instructor.getCreatedCourses()){
+                  for(Student student : course.getStudentsIncourse())
+                      for(Course c : student.getEnrolledCourses())
+                         if(course.getCourseId()==c.getCourseId()){
+                                           sum+=c.getProgress();
+                                            n+=1;
+                              break;}
+              completionPercentages.put(course.getTitle(), sum/(double)n);
+               n=0;
+            sum=0.0;}
+        try {
+            new ChartFrame("Completion Percentages", "Course", "Completion %", completionPercentages,this.instructor).setVisible(true);
+        } catch (IOException ex) {
+            System.getLogger(InstructorDashboardFrame.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_jButton33ActionPerformed
+
+    private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
+        this.dispose();
+       Map<String, Double> completionPercentages = new HashMap<>();
+          double sum=0;
+          int n=0;
+          for(Student student : user.getStudents()){
+              for(Course course : student.getEnrolledCourses())
+                  {sum+=course.getProgress();
+                  n+=1;}
+               completionPercentages.put(student.getUsername(),sum/(double)n);
+               n=0;
+               sum=0.0;
+          }
+        
+        try {
+            new ChartFrame("Completion Percentages", "Student", "Completion %", completionPercentages,this.instructor).setVisible(true);
+        } catch (IOException ex) {
+            System.getLogger(InstructorDashboardFrame.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_jButton34ActionPerformed
+
+    private void jTextField19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField19ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField19ActionPerformed
+
+    private void jTextField24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField24ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField24ActionPerformed
+
+    private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton36ActionPerformed
+       
+        String title=null;
+        if(jTextField24.getText()!=null)
+             title=jTextField24.getText();
+        else {
+        JOptionPane.showMessageDialog(this,
+                                "❌Please enter a value before proceeding.",
+                                "Empty",
+                                JOptionPane.ERROR_MESSAGE);}
+        if(title != null)
+        this.quiz =new Quiz(title,0 , null );
+            
+    }//GEN-LAST:event_jButton36ActionPerformed
+
+    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
+        int selectedRow = jTable10.getSelectedRow();
+        if (selectedRow == -1) { 
+    JOptionPane.showMessageDialog(this, "Please select a row from the table first!");
+} else { 
+        int option=JOptionPane.showConfirmDialog(this, "Are you sure you want to Update this student?", "Update",JOptionPane.YES_NO_OPTION);
+        if(option==0){
+            jTextField43.setEditable(true);
+            jButton27.setEnabled(true);
+        }}
+    }//GEN-LAST:event_jButton26ActionPerformed
+
+    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
+      Home.setVisible(false);
+        Createcourse.setVisible(false);
+        Editcourse.setVisible(false);
+        Deletecourse.setVisible(false);
+        Createlesson.setVisible(true);
+        Editlesson.setVisible(false);
+        Deletelesson.setVisible(false);
+        View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+        
+    }//GEN-LAST:event_jButton28ActionPerformed
+
+    private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton38ActionPerformed
+
+    private void jButton39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton39ActionPerformed
+        Home.setVisible(true);
+        Createcourse.setVisible(false);
+        Editcourse.setVisible(false);
+        Deletecourse.setVisible(false);
+        Createlesson.setVisible(false);
+        Editlesson.setVisible(false);
+        Deletelesson.setVisible(false);
+        View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+    }//GEN-LAST:event_jButton39ActionPerformed
+
+    private void jButton35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton35ActionPerformed
+        
+        String text = null;
+        String correct = null;
+        String Options[]=new String[4];
+        String title=null;
+        
+        int size=quiz.getNumberOfQuestions()+1;
+        int questionid=1000+quiz.getNumberOfQuestions();
+        if(jTextField33.getText()!=null)
+             text=jTextField33.getText();
+        else {
+        JOptionPane.showMessageDialog(this,
+                                "❌Please enter a value before proceeding.",
+                                "Empty",
+                                JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if(jTextField32.getText()!=null)
+             correct=jTextField32.getText();
+        else{
+        JOptionPane.showMessageDialog(this,
+                                "❌Please enter a value before proceeding.",
+                                "Empty",
+                                JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if(jTextField34.getText()!=null)
+             Options[0]=jTextField34.getText();
+        else{
+        JOptionPane.showMessageDialog(this,
+                                "❌Please enter a value before proceeding.",
+                                "Empty",
+                                JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if(jTextField35.getText()!=null)
+             Options[1]=jTextField35.getText();
+        else{
+        JOptionPane.showMessageDialog(this,
+                                "❌Please enter a value before proceeding.",
+                                "Empty",
+                                JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if(jTextField36.getText()!=null)
+             Options[2]=jTextField36.getText();
+        else{
+        JOptionPane.showMessageDialog(this,
+                                "❌Please enter a value before proceeding.",
+                                "Empty",
+                                JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if(jTextField37.getText()!=null)
+             Options[3]=jTextField37.getText();
+        else{
+        JOptionPane.showMessageDialog(this,
+                                "❌Please enter a value before proceeding.",
+                                "Empty",
+                                JOptionPane.ERROR_MESSAGE);
+        }
+        jTextField25.setText(String.valueOf(size));
+        jTextField38.setText(String.valueOf(questionid));
+        if(text != null && correct != null && Options[0] != null && Options[1] != null && Options[2] != null && Options[3] != null)
+        {
+            quiz.addQuestion(new Questions(questionid , text,correct,Options));
+            quiz.setNumberOfQuestions(quiz.getNumberOfQuestions()+1);
+            jTextField32.setText("");
+            jTextField33.setText("");
+            jTextField35.setText("");
+            jTextField36.setText("");
+            jTextField37.setText("");
+            jTextField38.setText("");
+            jTextField25.setText("");
+            
+            JOptionPane.showMessageDialog(this,
+                                "❌you must create lesson",
+                                "lesson createion",
+                                JOptionPane.INFORMATION_MESSAGE);}
+    }//GEN-LAST:event_jButton35ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        Home.setVisible(false);
+        Createcourse.setVisible(false);
+        Editcourse.setVisible(false);
+        Deletecourse.setVisible(false);
+        Createlesson.setVisible(false);
+        Editlesson.setVisible(false);
+        Deletelesson.setVisible(false);
+        View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(true);
+        Addquiz.setVisible(false);
+    }//GEN-LAST:event_jButton23ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Addquestion;
+    private javax.swing.JPanel Addquiz;
     private javax.swing.JButton Back;
     private javax.swing.JButton Back1;
     private javax.swing.JPanel Createcourse;
@@ -1914,6 +2801,8 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JPanel Editcourse;
     private javax.swing.JPanel Editlesson;
     private javax.swing.JPanel Home;
+    private javax.swing.JPanel PerformanceAnalytics;
+    private javax.swing.JPanel Updatequiz;
     private javax.swing.JPanel View;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -1930,14 +2819,43 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
+    private javax.swing.JButton jButton25;
+    private javax.swing.JButton jButton26;
+    private javax.swing.JButton jButton27;
+    private javax.swing.JButton jButton28;
+    private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton30;
+    private javax.swing.JButton jButton31;
+    private javax.swing.JButton jButton32;
+    private javax.swing.JButton jButton33;
+    private javax.swing.JButton jButton34;
+    private javax.swing.JButton jButton35;
+    private javax.swing.JButton jButton36;
+    private javax.swing.JButton jButton37;
+    private javax.swing.JButton jButton38;
+    private javax.swing.JButton jButton39;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1945,6 +2863,7 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable10;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
@@ -1967,6 +2886,8 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextField23;
+    private javax.swing.JTextField jTextField24;
+    private javax.swing.JTextField jTextField25;
     private javax.swing.JTextField jTextField26;
     private javax.swing.JTextField jTextField27;
     private javax.swing.JTextField jTextField28;
@@ -1974,7 +2895,15 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField30;
     private javax.swing.JTextField jTextField31;
+    private javax.swing.JTextField jTextField32;
+    private javax.swing.JTextField jTextField33;
+    private javax.swing.JTextField jTextField34;
+    private javax.swing.JTextField jTextField35;
+    private javax.swing.JTextField jTextField36;
+    private javax.swing.JTextField jTextField37;
+    private javax.swing.JTextField jTextField38;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField43;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
