@@ -11,7 +11,7 @@ public class Login {
 
 
     public Login() {
-        this.user = new User("users.json");
+        this.user = new User("D:\\programming\\java\\lab8\\lab8_downloaded_from_githiub\\lab7\\users.json");
         user.load();
         this.allStudents = user.getStudents() ;
         this.allInstructors = user.getInstructors() ;

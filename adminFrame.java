@@ -128,7 +128,7 @@ public class adminFrame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)
     {
         // TODO add your handling code here:
-        Courses courses = new Courses ("courses.json");
+        Courses courses = new Courses ("D:\\programming\\java\\lab8\\lab8_downloaded_from_githiub\\lab7\\courses.json");
         try {
             courses.load();
         } catch (IOException e) {
@@ -188,7 +188,7 @@ public class adminFrame extends javax.swing.JFrame {
         model.addColumn("Instructor ID");
         model.addColumn("Status");
 
-        Courses cs = new Courses("courses.json");
+        Courses cs = new Courses("D:\\programming\\java\\lab8\\lab8_downloaded_from_githiub\\lab7\\courses.json");
         try {
             cs.load();
         } catch (IOException e) {
@@ -241,4 +241,3 @@ public class adminFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonUpdate;
     // End of variables declaration
 }
-

@@ -1,3 +1,4 @@
+package lab7;
 import java.util.UUID;
 
 public class Certificate {

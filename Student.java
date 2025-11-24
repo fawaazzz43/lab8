@@ -31,7 +31,7 @@ public class Student {
     // --- FIXED SEARCH METHOD ---
     public ArrayList<Course> search(String word) {
         try {
-            String content = new String(Files.readAllBytes(Paths.get("courses.json")));
+            String content = new String(Files.readAllBytes(Paths.get("D:\\programming\\java\\lab8\\lab8_downloaded_from_githiub\\lab7\\courses.json")));
             JSONArray array = new JSONArray(content);
 
             ArrayList<Course> coursesOfSearch = new ArrayList<>();
@@ -89,7 +89,7 @@ public class Student {
         enrolledCourses.add(course);
 
         // Update the Course file (adds student to the course's student list)
-        Courses courses = new Courses("courses.json");
+        Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_downloaded_from_githiub\\lab7\\courses.json");
         courses.load();
         courses.UpdateStudentOfCourse(course, this);
         courses.SaveToJsonCourses();

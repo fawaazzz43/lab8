@@ -150,18 +150,18 @@ public class LoginFrame extends javax.swing.JFrame {
 
              
              
-              new StudentDashboardFrame(new User("users.json").searchStudentById(email)).setVisible(true);
+              new StudentDashboardFrame(new User("D:\\programming\\java\\lab8\\lab8_downloaded_from_githiub\\lab7\\users.json").searchStudentById(email)).setVisible(true);
          this.dispose();
             // Proceed to the next screen or functionality
         } else if (found == 2) {
             JOptionPane.showMessageDialog(this, "Login successful(Instructor)!");
-            new InstructorDashboardFrame(new User("users.json").searchInstructorById(email)).setVisible(true);
+            new InstructorDashboardFrame(new User("D:\\programming\\java\\lab8\\lab8_downloaded_from_githiub\\lab7\\users.json").searchInstructorById(email)).setVisible(true);
             this.dispose();
             // Proceed to the next screen or functionality
         } else if (found == 3)
         {
             JOptionPane.showMessageDialog(this, "Login successful(Admin)!");
-            new adminFrame(new User("users.json").searchAdminById(email)).setVisible(true);
+            new adminFrame(new User("D:\\programming\\java\\lab8\\lab8_downloaded_from_githiub\\lab7\\users.json").searchAdminById(email)).setVisible(true);
             this.dispose();
         }
         else {

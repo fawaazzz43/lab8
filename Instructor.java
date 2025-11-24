@@ -21,26 +21,6 @@ public class Instructor{
     ArrayList<Course> createdCourses = new ArrayList<>();
     Courses courses = new Courses("courses.json");
       User user=new User("users.json");
-
-    public String getRole() {
-        return role;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public ArrayList<Course> getCreatedCourses() {
-        return createdCourses;
-    }
-
-    public Courses getCourses() {
-        return courses;
-    }
-
-    public User getUser() {
-        return user;
-    }
     public Instructor(int userId, String role, String username, String email, String passwordHash) throws IOException
     {
         this.userId = userId;

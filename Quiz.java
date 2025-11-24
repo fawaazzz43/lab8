@@ -6,7 +6,7 @@ public class Quiz {
     private String title;
     private int numberOfQuestions;
     private ArrayList<Questions> questions;
-    private int score;
+
     public String getTitle() {
         return title;
     }
@@ -65,10 +65,6 @@ public class Quiz {
         {
             return faild;
         }
-    }
-
-    public int getScore() {
-        return score;
     }
 
 

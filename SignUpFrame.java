@@ -199,7 +199,6 @@ public class SignUpFrame extends javax.swing.JFrame {
     }
 
     private int generateUserId() {
-        int id;
         return (int) (Math.random() * 10000);
     }
 

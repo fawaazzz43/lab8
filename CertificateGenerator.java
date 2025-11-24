@@ -1,4 +1,6 @@
+package lab7;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class CertificateGenerator {
 

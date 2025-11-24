@@ -1,3 +1,5 @@
+package lab7;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.FileOutputStream;
@@ -69,7 +71,7 @@ private void loadCertificates() {
         document.close();
     }
         
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -99,8 +101,8 @@ private void loadCertificates() {
     /**
      * @param args the command line arguments
      */
-    
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-}
+
