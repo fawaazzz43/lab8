@@ -179,7 +179,7 @@ public class CourseWindow extends JFrame
         boolean isEnrolled = false;
         if (student != null && student.getEnrolledCourses() != null) {
             for (Course c : student.getEnrolledCourses()) {
-                if (c.getCourseId().equals(course.getCourseId())) {
+                if (c.getCourseId()==(course.getCourseId())) {
                     isEnrolled = true;
                     break;
                 }
