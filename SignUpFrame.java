@@ -148,9 +148,9 @@ public class SignUpFrame extends javax.swing.JFrame {
             return;
         }
 
-        String userId = String.valueOf(generateUserId());
+        int userId = generateUserId();
 
-        User userFile = new User("D:\\programming\\java\\lab8\\lab8_downloaded_from_githiub\\lab7\\users.json");
+        User userFile = new User("users.json");
         userFile.load();
 
         SignUp signUp = new SignUp();
@@ -199,6 +199,7 @@ public class SignUpFrame extends javax.swing.JFrame {
     }
 
     private int generateUserId() {
+        int id;
         return (int) (Math.random() * 10000);
     }
 
