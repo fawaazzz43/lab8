@@ -2,13 +2,13 @@ package lab7;
 
 public class admin
 {
-    private String userId ;
+    private int userId ;
     private String role ;
     private String username ;
     private String email ;
     private String passwordHash ;
 
-    public admin (  String userId , String role , String username , String email , String passwordHash)
+    public admin (  int userId , String role , String username , String email , String passwordHash)
     {
         this.userId = userId;
         this.role = role;
@@ -17,7 +17,7 @@ public class admin
         this.passwordHash = passwordHash;
     }
 
-    public String getUserId()
+    public int getUserId()
     {
         return userId;
     }
@@ -39,3 +39,4 @@ public class admin
     }
 
 }
+
