@@ -9,7 +9,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 public class Student {
-    String userId;
+    int userId;
     String role;
     String username;
     String email;
@@ -17,7 +17,7 @@ public class Student {
     ArrayList<Course> enrolledCourses;
     double progress;
 
-    public Student(String userId, String role, String username, String email, String passwordHash, double progress) {
+    public Student(int userId, String role, String username, String email, String passwordHash, double progress) {
         this.userId = userId;
         this.role = role;
         this.username = username;
@@ -31,7 +31,7 @@ public class Student {
     // --- FIXED SEARCH METHOD ---
     public ArrayList<Course> search(String word) {
         try {
-            String content = new String(Files.readAllBytes(Paths.get("D:\\programming\\java\\lab8\\lab8_downloaded_from_githiub\\lab7\\courses.json")));
+            String content = new String(Files.readAllBytes(Paths.get("courses.json")));
             JSONArray array = new JSONArray(content);
 
             ArrayList<Course> coursesOfSearch = new ArrayList<>();
@@ -44,10 +44,10 @@ public class Student {
 
                     // 1. Create the Course object
                     Course course = new Course(
-                            object.getString("courseId"),
+                            object.getInt("courseId"),
                             object.getString("title"),
                             object.getString("description"),
-                            object.getString("instructorId"),
+                            object.getInt("instructorId"),
                             object.getString("status")
                     );
 
@@ -58,10 +58,10 @@ public class Student {
                             JSONObject lessonObj = lessonsArray.getJSONObject(j);
 
                             Lesson lesson = new Lesson(
-                                    lessonObj.getString("lessonId"),
+                                    lessonObj.getInt("lessonId"),
                                     lessonObj.getString("title"),
                                     lessonObj.getString("content")
-                            );
+                                    , (Quiz) lessonObj.get("quiz"));
 
                             course.getLessons().add(lesson);
                         }
@@ -89,7 +89,7 @@ public class Student {
         enrolledCourses.add(course);
 
         // Update the Course file (adds student to the course's student list)
-        Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_downloaded_from_githiub\\lab7\\courses.json");
+        Courses courses = new Courses("courses.json");
         courses.load();
         courses.UpdateStudentOfCourse(course, this);
         courses.SaveToJsonCourses();
@@ -146,11 +146,11 @@ public class Student {
         }
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
