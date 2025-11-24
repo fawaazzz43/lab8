@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CertificateManager {
-    private static final String USERS_FILE = "D:\\programming\\java\\lab8\\lab8_v3\\users.json";
+    private static final String USERS_FILE = "users.json";
 
     public static ArrayList<Certificate> getCertificates(String studentID) throws Exception {
         ArrayList<Certificate> certificates = new ArrayList<>();

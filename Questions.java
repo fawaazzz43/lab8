@@ -1,5 +1,4 @@
 package lab7;
-
 public class Questions {
    
     private String questionText;
@@ -37,10 +36,10 @@ public class Questions {
     }
     
 
-    public Questions(int QuestionsId , String questionText, String correctAnswer, String[] options ) {
+    public Questions(String questionText, String correctAnswer, String[] options, int QuestionsId) {
         this.questionText = questionText;
         this.correctAnswer = correctAnswer;
-        this.options = new String[]{};
+        this.options = options;
         this.QuestionsId = QuestionsId;
     }
     

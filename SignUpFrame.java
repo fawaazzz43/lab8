@@ -150,7 +150,7 @@ public class SignUpFrame extends javax.swing.JFrame {
 
         int userId = generateUserId();
 
-        User userFile = new User("D:\\programming\\java\\lab8\\lab8_v3\\users.json");
+        User userFile = new User("users.json");
         userFile.load();
 
         SignUp signUp = new SignUp();
@@ -171,22 +171,26 @@ public class SignUpFrame extends javax.swing.JFrame {
 
         password = SignUp.hashPassword(password);
 
-        switch (role) {
-            case "student" -> {
-                Student newUser = new Student(userId, role, username, email, password);
-                signUp.AddStudent(newUser);
-                new StudentDashboardFrame(newUser).setVisible(true);
+        try {
+            switch (role) {
+                case "student" -> {
+                    Student newUser = new Student(userId, role, username, email, password);
+                    signUp.AddStudent(newUser);
+                    new StudentDashboardFrame(newUser).setVisible(true);
+                }
+                case "instructor" -> {
+                    Instructor newUser = new Instructor(userId, role, username, email, password);
+                    signUp.AddInstructor(newUser);
+                    new InstructorDashboardFrame(newUser).setVisible(true);
+                }
+                case "admin" -> {
+                    admin newUser = new admin(userId, role, username, email, password);
+                    signUp.AddAdmin(newUser);
+                    new adminFrame(newUser).setVisible(true);
+                }
             }
-//                case "instructor" -> {
-//                    Instructor newUser = new Instructor(userId, role, username, email, password);
-//                    signUp.AddInstructor(newUser);
-//                    new InstructorDashboardFrame(newUser).setVisible(true);
-//                }
-            case "admin" -> {
-                admin newUser = new admin(userId, role, username, email, password);
-                signUp.AddAdmin(newUser);
-                new adminFrame(newUser).setVisible(true);
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         userFile.save();

@@ -39,6 +39,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame
 
         jList2.setModel(previousTitles);
     }
+    
 
     @SuppressWarnings("unchecked")
     private void initComponents()

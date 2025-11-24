@@ -1,5 +1,4 @@
 package lab7;
-
 import java.util.ArrayList;
 
 public class Quiz {
@@ -8,12 +7,8 @@ public class Quiz {
     private ArrayList<Questions> questions;
     private int score;
 
-    public Quiz(String title, int numberOfQuestions, ArrayList<Questions> questions)
-    {
-        this.title = title;
-        this.numberOfQuestions = numberOfQuestions;
-        this.questions = questions;
-    }
+
+    
     public String getTitle() {
         return title;
     }
@@ -30,6 +25,11 @@ public class Quiz {
         this.numberOfQuestions = numberOfQuestions;
     }
 
+    
+    public Quiz(String title,int numberOfQuestions) {
+        this.title = title;
+        this.questions = new ArrayList<>();
+    }
 
     public void addQuestion(Questions question) {
         questions.add(question);
@@ -61,11 +61,6 @@ public class Quiz {
     public int getScore() {
         return score;
     }
-
-//    public ArrayList<Questions> getQuestions ()
-//    {
-//        return questions ;
-//    }
 
 
 }

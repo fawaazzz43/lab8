@@ -19,8 +19,8 @@ import javax.swing.table.DefaultTableModel;
 public class InstructorDashboardFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InstructorDashboardFrame.class.getName());
-    Courses courses= new Courses("D:\\programming\\java\\lab8\\lab8_v3\\courses.json");
-     User user=new User("D:\\programming\\java\\lab8\\lab8_v3\\users.json");
+    Courses courses= new Courses("courses.json");
+     User user=new User("users.json");
     Instructor instructor;
     private Quiz quiz;
     private Questions question;
@@ -42,6 +42,10 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Editlesson.setVisible(false);
         Deletelesson.setVisible(false);
         View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
         
     }
 
@@ -244,6 +248,11 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         });
 
         jButton25.setText("View Performance Analytics");
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout HomeLayout = new javax.swing.GroupLayout(Home);
         Home.setLayout(HomeLayout);
@@ -1438,6 +1447,11 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         });
 
         jButton37.setText("Back");
+        jButton37.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton37ActionPerformed(evt);
+            }
+        });
 
         jTextField25.setEditable(false);
 
@@ -2637,7 +2651,7 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
                                 "Empty",
                                 JOptionPane.ERROR_MESSAGE);}
         if(title != null)
-        this.quiz =new Quiz(title,0 , null );
+        this.quiz =new Quiz(title,0);
             
     }//GEN-LAST:event_jButton36ActionPerformed
 
@@ -2754,7 +2768,7 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         jTextField38.setText(String.valueOf(questionid));
         if(text != null && correct != null && Options[0] != null && Options[1] != null && Options[2] != null && Options[3] != null)
         {
-            quiz.addQuestion(new Questions(questionid , text,correct,Options));
+            quiz.addQuestion(new Questions(text,correct,Options,questionid));
             quiz.setNumberOfQuestions(quiz.getNumberOfQuestions()+1);
             jTextField32.setText("");
             jTextField33.setText("");
@@ -2784,6 +2798,36 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
         Addquestion.setVisible(true);
         Addquiz.setVisible(false);
     }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
+        Home.setVisible(false);
+        Createcourse.setVisible(false);
+        Editcourse.setVisible(false);
+        Deletecourse.setVisible(false);
+        Createlesson.setVisible(false);
+        Editlesson.setVisible(false);
+        Deletelesson.setVisible(false);
+        View.setVisible(false);
+        PerformanceAnalytics.setVisible(false);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(true);
+    }//GEN-LAST:event_jButton37ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+       Home.setVisible(false);
+        Createcourse.setVisible(false);
+        Editcourse.setVisible(false);
+        Deletecourse.setVisible(false);
+        Createlesson.setVisible(false);
+        Editlesson.setVisible(false);
+        Deletelesson.setVisible(false);
+        View.setVisible(false);
+        PerformanceAnalytics.setVisible(true);
+        Updatequiz.setVisible(false);
+        Addquestion.setVisible(false);
+        Addquiz.setVisible(false);
+    }//GEN-LAST:event_jButton25ActionPerformed
 
     /**
      * @param args the command line arguments

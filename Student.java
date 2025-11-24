@@ -30,7 +30,7 @@ public class Student {
     // --- FIXED SEARCH METHOD ---
     public ArrayList<Course> search(String word) {
         try {
-            String content = new String(Files.readAllBytes(Paths.get("D:\\programming\\java\\lab8\\lab8_v3\\courses.json")));
+            String content = new String(Files.readAllBytes(Paths.get("courses.json")));
             JSONArray array = new JSONArray(content);
 
             ArrayList<Course> coursesOfSearch = new ArrayList<>();
@@ -93,7 +93,7 @@ public class Student {
         enrolledCourses.add(course);
 
         // Update the Course file (adds student to the course's student list)
-        Courses courses = new Courses("D:\\programming\\java\\lab8\\lab8_v3\\courses.json");
+        Courses courses = new Courses("courses.json");
         courses.load();
         courses.UpdateStudentOfCourse(course, this);
         courses.SaveToJsonCourses();
@@ -104,7 +104,7 @@ public class Student {
 
     private void updateUserInUsersFile() {
         try {
-            String content = new String(Files.readAllBytes(Paths.get("D:\\programming\\java\\lab8\\lab8_v3\\users.json")));
+            String content = new String(Files.readAllBytes(Paths.get("users.json")));
             JSONObject jsonObj = new JSONObject(content);
             JSONArray students = jsonObj.getJSONArray("students");
 
@@ -142,7 +142,7 @@ public class Student {
             }
 
             // Write back to file
-            Files.write(Paths.get("D:\\programming\\java\\lab8\\lab8_v3\\users.json"), jsonObj.toString(4).getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            Files.write(Paths.get("users.json"), jsonObj.toString(4).getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
