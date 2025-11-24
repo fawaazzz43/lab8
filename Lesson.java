@@ -4,23 +4,34 @@ import java.util.ArrayList;
 // The primary class definition
 public class Lesson {
 
-    private String lessonId;
+    private int lessonId;
     private String title;
     private String content;
     private ArrayList<String> resources;
+    private Quiz quiz;
 
-    public Lesson(String lessonId, String title, String content) {
+    public Lesson(int lessonId, String title, String content,Quiz quiz) {
         this.lessonId = lessonId;
         this.title = title;
         this.content = content;
         this.resources = new ArrayList<>();
+        this.quiz=quiz;
     }
 
-    public String getLessonId() {
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
+
+   
+    public int getLessonId() {
         return lessonId;
     }
 
-    public void setLessonId(String lessonId) {
+    public void setLessonId(int lessonId) {
         this.lessonId = lessonId;
     }
 
